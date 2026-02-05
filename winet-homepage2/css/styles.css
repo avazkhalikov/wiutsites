@@ -1,0 +1,547 @@
+/* ============================================
+   WINET 2.0 - State of the Art Edition
+   Light/Dark Theme Support
+   ============================================ */
+
+/* ----------------------------------------
+   CSS Custom Properties
+   ---------------------------------------- */
+:root {
+    /* WIUT Brand Colors */
+    --wiut-blue: #264F9D;
+    --wiut-burgundy: #C7293F;
+    --wiut-sky: #4DACE1;
+    --wiut-gold: #F6AC10;
+    --wiut-teal: #358A7C;
+    --wiut-forest: #0C6326;
+    
+    /* Dark Theme Colors */
+    --dark-900: #0a0a0f;
+    --dark-800: #12121a;
+    --dark-700: #1a1a24;
+    --dark-600: #24242f;
+    --dark-500: #2e2e3a;
+    --dark-400: #3a3a48;
+    
+    /* Light Theme Colors */
+    --light-50: #fafbfc;
+    --light-100: #f4f6f8;
+    --light-200: #e9ecf0;
+    --light-300: #d3d9e0;
+    --light-400: #a8b3c0;
+    
+    /* Transitions */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ----------------------------------------
+   Base Styles
+   ---------------------------------------- */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* ----------------------------------------
+   Keyframe Animations
+   ---------------------------------------- */
+@keyframes gradient {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(10px, -20px) rotate(2deg);
+    }
+    50% {
+        transform: translate(-5px, 10px) rotate(-1deg);
+    }
+    75% {
+        transform: translate(-15px, -5px) rotate(1deg);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 20px rgba(77, 172, 225, 0.3);
+    }
+    to {
+        box-shadow: 0 0 40px rgba(77, 172, 225, 0.5);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ----------------------------------------
+   Bento Cards - Staggered Animation
+   ---------------------------------------- */
+.bento-card {
+    opacity: 0;
+    animation: slideUp 0.6s ease-out forwards;
+    animation-delay: var(--delay, 0s);
+}
+
+.bento-card:nth-child(1) { --delay: 0.1s; }
+.bento-card:nth-child(2) { --delay: 0.15s; }
+.bento-card:nth-child(3) { --delay: 0.2s; }
+.bento-card:nth-child(4) { --delay: 0.25s; }
+.bento-card:nth-child(5) { --delay: 0.3s; }
+.bento-card:nth-child(6) { --delay: 0.35s; }
+
+/* ----------------------------------------
+   Workspace Views
+   ---------------------------------------- */
+.workspace-view:not(.hidden) {
+    animation: fadeIn 0.4s ease-out;
+}
+
+.workspace-view.hidden {
+    display: none;
+}
+
+/* ----------------------------------------
+   Tile Cards - Hover Effects
+   ---------------------------------------- */
+.tile-card {
+    transition: all var(--transition-normal);
+    will-change: transform, box-shadow;
+}
+
+.tile-card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+.tile-card:active {
+    transform: translateY(-4px) scale(1.01);
+}
+
+/* ----------------------------------------
+   Circular Progress Ring
+   ---------------------------------------- */
+.progress-ring {
+    transition: stroke-dashoffset 1s ease-out;
+}
+
+@keyframes progressFill {
+    from {
+        stroke-dashoffset: 226;
+    }
+}
+
+.progress-ring {
+    animation: progressFill 1.5s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+/* ----------------------------------------
+   Counter Animation
+   ---------------------------------------- */
+.counter {
+    display: inline-block;
+    animation: countUp 0.6s ease-out forwards;
+    animation-delay: 0.3s;
+}
+
+/* ----------------------------------------
+   Glassmorphism Effects
+   ---------------------------------------- */
+.glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-dark {
+    background: rgba(18, 18, 26, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ----------------------------------------
+   Command Palette
+   ---------------------------------------- */
+#cmdPalette.show {
+    display: block;
+}
+
+#cmdPalette.show > div:first-child {
+    animation: fadeIn 0.2s ease-out;
+}
+
+#cmdPalette.show > div:last-child > div {
+    animation: scaleIn 0.3s ease-out;
+}
+
+/* ----------------------------------------
+   Role Switcher
+   ---------------------------------------- */
+.role-btn {
+    transition: all var(--transition-fast);
+}
+
+.role-btn.active {
+    background: linear-gradient(135deg, var(--wiut-teal), var(--wiut-forest));
+    box-shadow: 0 4px 20px rgba(53, 138, 124, 0.4);
+}
+
+/* ----------------------------------------
+   Focus States
+   ---------------------------------------- */
+*:focus-visible {
+    outline: 2px solid var(--wiut-sky);
+    outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--wiut-sky);
+    outline-offset: 2px;
+}
+
+/* ----------------------------------------
+   Scrollbar - Light Theme
+   ---------------------------------------- */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-track {
+    background: var(--dark-800);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: var(--dark-500);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-400);
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+.dark * {
+    scrollbar-color: var(--dark-500) var(--dark-800);
+}
+
+/* ----------------------------------------
+   Selection
+   ---------------------------------------- */
+::selection {
+    background: var(--wiut-sky);
+    color: white;
+}
+
+/* ----------------------------------------
+   Responsive Adjustments
+   ---------------------------------------- */
+@media (max-width: 768px) {
+    .bento-card {
+        --delay: 0s !important;
+    }
+}
+
+@media (max-width: 640px) {
+    header .backdrop-blur-xl {
+        border-radius: 1rem;
+    }
+}
+
+/* ----------------------------------------
+   Reduced Motion
+   ---------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .bento-card {
+        opacity: 1;
+    }
+}
+
+/* ----------------------------------------
+   Print Styles
+   ---------------------------------------- */
+@media print {
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    header,
+    footer,
+    .role-btn,
+    #cmdPalette,
+    #themeToggle {
+        display: none !important;
+    }
+    
+    .bento-card,
+    .tile-card {
+        background: #f5f5f5 !important;
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+    }
+}
+
+/* ----------------------------------------
+   Notification Toast
+   ---------------------------------------- */
+.winet-notification {
+    position: fixed;
+    bottom: 6rem;
+    right: 1.5rem;
+    z-index: 200;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, var(--wiut-blue), var(--wiut-sky));
+    color: white;
+    border-radius: 1rem;
+    font-weight: 500;
+    box-shadow: 0 10px 40px rgba(38, 79, 157, 0.4);
+    transform: translateY(0);
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.winet-notification.hide {
+    transform: translateY(20px);
+    opacity: 0;
+}
+
+/* ----------------------------------------
+   Gradient Text Animation
+   ---------------------------------------- */
+.gradient-text-animated {
+    background: linear-gradient(
+        90deg,
+        var(--wiut-sky),
+        var(--wiut-teal),
+        var(--wiut-gold),
+        var(--wiut-sky)
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient 8s ease infinite;
+}
+
+/* ----------------------------------------
+   Hover Glow Effect
+   ---------------------------------------- */
+.hover-glow {
+    transition: box-shadow var(--transition-normal);
+}
+
+.hover-glow:hover {
+    box-shadow: 0 0 30px rgba(77, 172, 225, 0.3);
+}
+
+/* ----------------------------------------
+   Loading Skeleton
+   ---------------------------------------- */
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        #e0e0e0 25%,
+        #f0f0f0 50%,
+        #e0e0e0 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+    border-radius: 0.5rem;
+}
+
+.dark .skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--dark-600) 25%,
+        var(--dark-500) 50%,
+        var(--dark-600) 75%
+    );
+    background-size: 200% 100%;
+}
+
+/* ----------------------------------------
+   Utility Classes
+   ---------------------------------------- */
+.text-gradient {
+    background: linear-gradient(135deg, var(--wiut-sky), var(--wiut-teal));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.bg-gradient-brand {
+    background: linear-gradient(135deg, var(--wiut-blue), var(--wiut-sky));
+}
+
+.border-gradient {
+    border: 1px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, var(--wiut-blue), var(--wiut-sky)) border-box;
+}
+
+.dark .border-gradient {
+    background: linear-gradient(var(--dark-700), var(--dark-700)) padding-box,
+                linear-gradient(135deg, var(--wiut-blue), var(--wiut-sky)) border-box;
+}
+
+/* ----------------------------------------
+   Mobile Bottom Nav Safety
+   ---------------------------------------- */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    footer {
+        padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+    }
+}
+
+/* ----------------------------------------
+   Theme Transition Smoothing
+   ---------------------------------------- */
+html.dark {
+    color-scheme: dark;
+}
+
+html:not(.dark) {
+    color-scheme: light;
+}
+
+/* Smooth color transitions for theme switching */
+body,
+header,
+footer,
+.bento-card > div,
+.tile-card,
+.role-btn {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* ----------------------------------------
+   AI Assistant Widget
+   ---------------------------------------- */
+.animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+}
+
+#aiChatWindow {
+    transform-origin: bottom right;
+}
+
+#aiChatMessages::-webkit-scrollbar {
+    width: 4px;
+}
+
+#aiChatMessages::-webkit-scrollbar-thumb {
+    background: rgba(38, 79, 157, 0.3);
+    border-radius: 2px;
+}
+
+@keyframes bounce-subtle {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+#aiChatToggle:hover {
+    animation: bounce-subtle 0.5s ease-in-out;
+}

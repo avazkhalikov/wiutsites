@@ -1,0 +1,349 @@
+/* ============================================
+   WINET THE PULSE - Bold & Energetic
+   ============================================ */
+
+/* ----------------------------------------
+   CSS Variables
+   ---------------------------------------- */
+:root {
+    --wiut-blue: #264F9D;
+    --wiut-burgundy: #C7293F;
+    --wiut-sky: #4DACE1;
+    --wiut-gold: #F6AC10;
+    --wiut-teal: #358A7C;
+    --wiut-forest: #0C6326;
+}
+
+/* ----------------------------------------
+   Base Styles
+   ---------------------------------------- */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+    background: rgba(77, 172, 225, 0.3);
+}
+
+html.dark ::selection {
+    color: white;
+}
+
+/* ----------------------------------------
+   Animated Gradient Text
+   ---------------------------------------- */
+.gradient-text-animated {
+    background: linear-gradient(
+        90deg,
+        var(--wiut-blue),
+        var(--wiut-sky),
+        var(--wiut-teal),
+        var(--wiut-gold),
+        var(--wiut-burgundy),
+        var(--wiut-blue)
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 8s ease infinite;
+}
+
+@keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* ----------------------------------------
+   Grid Animation Background
+   ---------------------------------------- */
+.grid-animation {
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(77, 172, 225, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(77, 172, 225, 0.1) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: grid-move 20s linear infinite;
+}
+
+@keyframes grid-move {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(60px, 60px); }
+}
+
+/* ----------------------------------------
+   Floating Particles
+   ---------------------------------------- */
+.particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--wiut-sky);
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: float-up 15s linear infinite;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.5;
+    }
+    90% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-100vh) scale(1);
+        opacity: 0;
+    }
+}
+
+/* ----------------------------------------
+   Pulse Dot Animation
+   ---------------------------------------- */
+.pulse-dot {
+    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+}
+
+/* ----------------------------------------
+   Slow Pulse Animation
+   ---------------------------------------- */
+.animate-pulse-slow {
+    animation: pulse-slow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* ----------------------------------------
+   Role Buttons
+   ---------------------------------------- */
+.role-btn.active {
+    background: linear-gradient(135deg, var(--wiut-blue), var(--wiut-sky));
+    color: white;
+    border: 1px solid var(--wiut-sky);
+    box-shadow: 0 0 30px rgba(77, 172, 225, 0.4);
+}
+
+/* ----------------------------------------
+   Stat Cards
+   ---------------------------------------- */
+.stat-card {
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.stat-card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+/* ----------------------------------------
+   Marquee Animation
+   ---------------------------------------- */
+.marquee {
+    display: flex;
+    overflow: hidden;
+}
+
+.marquee-content {
+    display: flex;
+    animation: marquee 30s linear infinite;
+    white-space: nowrap;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ----------------------------------------
+   Schedule Cards
+   ---------------------------------------- */
+.schedule-card {
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.schedule-card:hover {
+    transform: translateY(-4px);
+}
+
+.schedule-card.active {
+    animation: glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        box-shadow: 0 0 30px rgba(77, 172, 225, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 50px rgba(77, 172, 225, 0.5);
+    }
+}
+
+/* ----------------------------------------
+   Deadline Cards
+   ---------------------------------------- */
+.deadline-card {
+    transition: all 0.3s ease;
+}
+
+.deadline-card:hover {
+    transform: translateX(8px);
+}
+
+.deadline-card.urgent {
+    animation: urgent-pulse 2s ease-in-out infinite;
+}
+
+@keyframes urgent-pulse {
+    0%, 100% {
+        border-color: rgba(199, 41, 63, 0.3);
+    }
+    50% {
+        border-color: rgba(199, 41, 63, 0.8);
+        box-shadow: 0 0 20px rgba(199, 41, 63, 0.3);
+    }
+}
+
+/* ----------------------------------------
+   Quick Buttons
+   ---------------------------------------- */
+.quick-btn {
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.quick-btn:hover {
+    transform: translateY(-4px) scale(1.02);
+}
+
+/* ----------------------------------------
+   Service Tiles
+   ---------------------------------------- */
+.service-tile {
+    transition: all 0.3s ease;
+}
+
+.service-tile:hover {
+    transform: translateY(-2px);
+}
+
+/* ----------------------------------------
+   Counter Animation
+   ---------------------------------------- */
+.counter {
+    transition: all 0.3s ease;
+}
+
+/* ----------------------------------------
+   Scrollbar - Light Mode
+   ---------------------------------------- */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Scrollbar - Dark Mode */
+html.dark ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* ----------------------------------------
+   Focus States
+   ---------------------------------------- */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--wiut-sky);
+    outline-offset: 2px;
+}
+
+/* ----------------------------------------
+   AI Chat Animation
+   ---------------------------------------- */
+#aiChat {
+    animation: slide-up 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ----------------------------------------
+   Responsive
+   ---------------------------------------- */
+@media (max-width: 768px) {
+    .marquee-content {
+        animation-duration: 20s;
+    }
+}
+
+/* ----------------------------------------
+   Print Styles
+   ---------------------------------------- */
+@media print {
+    .grid-animation,
+    .particles,
+    #aiToggle,
+    #aiChat {
+        display: none !important;
+    }
+}

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WINET — Your Sanctuary</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Plus Jakarta Sans - Wellington-like font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        wiut: {
+                            blue: '#264F9D',
+                            burgundy: '#C7293F',
+                            sky: '#4DACE1',
+                            gold: '#F6AC10',
+                            teal: '#358A7C',
+                            forest: '#0C6326',
+                        },
+                        sanctuary: {
+                            cream: '#FEFCF9',
+                            warm: '#FDF8F3',
+                            blush: '#FFF5F5',
+                            mint: '#F0FDF9',
+                            sky: '#F0F9FF',
+                            lavender: '#FAF5FF',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        '4xl': '2rem',
+                        '5xl': '2.5rem',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-sanctuary-cream min-h-screen font-sans text-gray-800 antialiased">
+    
+    <!-- ============================================
+         AMBIENT BACKGROUND
+         ============================================ -->
+    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <!-- Soft gradient orbs -->
+        <div class="ambient-orb absolute -top-1/4 -left-1/4 w-[800px] h-[800px] rounded-full bg-gradient-to-br from-wiut-sky/10 to-wiut-teal/5 blur-3xl"></div>
+        <div class="ambient-orb absolute top-1/2 -right-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-wiut-gold/8 to-orange-200/5 blur-3xl" style="animation-delay: -5s;"></div>
+        <div class="ambient-orb absolute -bottom-1/4 left-1/3 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-wiut-blue/5 to-purple-200/5 blur-3xl" style="animation-delay: -10s;"></div>
+        
+        <!-- Subtle grain texture -->
+        <div class="absolute inset-0 opacity-[0.015]" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 256 256%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noise%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.8%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noise)%27/%3E%3C/svg%3E');"></div>
+    </div>
+    
+    <!-- ============================================
+         MAIN CONTAINER
+         ============================================ -->
+    <div class="max-w-6xl mx-auto px-6 py-8 md:py-12">
+        
+        <!-- ============================================
+             HEADER - Minimal & Warm
+             ============================================ -->
+        <header class="flex items-center justify-between mb-12 md:mb-16">
+            <!-- Logo -->
+            <div class="flex items-center space-x-3">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-wiut-blue to-wiut-sky flex items-center justify-center shadow-lg shadow-wiut-blue/20">
+                    <span class="text-xl font-bold text-white">W</span>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-gray-900">WINET</h1>
+                    <p class="text-[10px] text-gray-400 tracking-widest uppercase">Sanctuary</p>
+                </div>
+            </div>
+            
+            <!-- Right Side -->
+            <div class="flex items-center space-x-3">
+                <!-- Search -->
+                <button class="p-3 rounded-2xl bg-white/60 border border-gray-100 hover:bg-white hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-300">
+                    <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
+                </button>
+                
+                <!-- Notifications -->
+                <button class="relative p-3 rounded-2xl bg-white/60 border border-gray-100 hover:bg-white hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-300">
+                    <i data-lucide="bell" class="w-5 h-5 text-gray-400"></i>
+                    <span class="absolute top-2 right-2 w-2 h-2 bg-wiut-burgundy rounded-full"></span>
+                </button>
+                
+                <!-- Profile -->
+                <button class="flex items-center space-x-3 p-2 pr-4 rounded-full bg-white/60 border border-gray-100 hover:bg-white hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-300">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Profile" class="w-9 h-9 rounded-full object-cover ring-2 ring-white">
+                    <span class="text-sm font-medium text-gray-700 hidden sm:block">John</span>
+                    <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 hidden sm:block"></i>
+                </button>
+            </div>
+        </header>
+        
+        <!-- ============================================
+             GREETING - Personal & Warm
+             ============================================ -->
+        <section class="mb-12 md:mb-16 fade-in">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+                <div>
+                    <p class="text-sm font-medium text-wiut-teal mb-2" id="currentDate">Thursday, February 5</p>
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                        <span id="greeting">Good morning</span>,<br>
+                        <span class="text-gradient">John</span> ✨
+                    </h2>
+                    <p class="mt-4 text-lg text-gray-500 max-w-md" id="motivation">
+                        Today is a beautiful day to learn something new.
+                    </p>
+                </div>
+                
+                <!-- Semester Progress -->
+                <div class="flex-shrink-0">
+                    <div class="relative w-32 h-32 md:w-40 md:h-40">
+                        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="42" fill="none" stroke="#f1f5f9" stroke-width="6"/>
+                            <circle cx="50" cy="50" r="42" fill="none" stroke="url(#progressGradient)" stroke-width="6" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="79" class="progress-ring"/>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span class="text-3xl md:text-4xl font-bold text-gray-900">70%</span>
+                            <span class="text-xs text-gray-400 mt-1">Semester</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ============================================
+             ROLE SWITCHER - Pill Style
+             ============================================ -->
+        <section class="mb-10 fade-in" style="animation-delay: 0.1s;">
+            <div class="inline-flex p-1.5 rounded-full bg-white/80 border border-gray-100 shadow-sm">
+                <button class="role-btn active px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300" data-role="student">
+                    Student
+                </button>
+                <button class="role-btn px-5 py-2.5 rounded-full text-sm font-semibold text-gray-400 hover:text-gray-600 transition-all duration-300" data-role="staff">
+                    Staff
+                </button>
+                <button class="role-btn px-5 py-2.5 rounded-full text-sm font-semibold text-gray-400 hover:text-gray-600 transition-all duration-300" data-role="admin">
+                    Admin
+                </button>
+            </div>
+        </section>
+        
+        <!-- ============================================
+             MAIN CONTENT - Floating Cards
+             ============================================ -->
+        
+        <!-- STUDENT VIEW -->
+        <div class="workspace-view" data-view="student">
+            
+            <!-- Today's Focus -->
+            <section class="mb-8 fade-in" style="animation-delay: 0.2s;">
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Today's Focus</h3>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    <!-- Next Class -->
+                    <div class="sanctuary-card group lg:col-span-2 p-6 rounded-4xl bg-white/70 border border-gray-100 hover:bg-white hover:shadow-xl hover:shadow-gray-200/40 transition-all duration-500">
+                        <div class="flex items-start justify-between mb-6">
+                            <div>
+                                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-green-50 text-green-600 text-xs font-medium mb-3">
+                                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                                    <span>Up Next</span>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-1">Business Statistics</h4>
+                                <p class="text-gray-400">Dr. Sarah Smith • Room 301</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-3xl font-bold text-wiut-blue">09:00</p>
+                                <p class="text-sm text-gray-400">in 45 min</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Mini Schedule -->
+                        <div class="flex space-x-2 overflow-x-auto pb-2 -mx-2 px-2">
+                            <div class="flex-shrink-0 px-4 py-3 rounded-2xl bg-wiut-blue/10 border-2 border-wiut-blue/30">
+                                <p class="text-xs text-wiut-blue font-medium">09:00</p>
+                                <p class="text-sm font-semibold text-gray-700">Statistics</p>
+                            </div>
+                            <div class="flex-shrink-0 px-4 py-3 rounded-2xl bg-gray-50 border border-gray-100">
+                                <p class="text-xs text-gray-400 font-medium">11:00</p>
+                                <p class="text-sm font-semibold text-gray-600">Economics</p>
+                            </div>
+                            <div class="flex-shrink-0 px-4 py-3 rounded-2xl bg-gray-50 border border-gray-100">
+                                <p class="text-xs text-gray-400 font-medium">14:00</p>
+                                <p class="text-sm font-semibold text-gray-600">English</p>
+                            </div>
+                            <div class="flex-shrink-0 px-4 py-3 rounded-2xl bg-gray-50 border border-gray-100">
+                                <p class="text-xs text-gray-400 font-medium">16:00</p>
+                                <p class="text-sm font-semibold text-gray-600">IT Lab</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Attendance -->
+                    <div class="sanctuary-card p-6 rounded-4xl bg-gradient-to-br from-wiut-teal/10 to-transparent border border-wiut-teal/20 hover:shadow-xl hover:shadow-wiut-teal/10 transition-all duration-500">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="font-bold text-gray-900">Attendance</h4>
+                            <div class="w-10 h-10 rounded-xl bg-wiut-teal/20 flex items-center justify-center">
+                                <i data-lucide="user-check" class="w-5 h-5 text-wiut-teal"></i>
+                            </div>
+                        </div>
+                        <p class="text-5xl font-bold text-wiut-teal mb-2">92<span class="text-2xl">%</span></p>
+                        <p class="text-sm text-gray-400">Excellent! Keep it up 🌟</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Academic Journey -->
+            <section class="mb-8 fade-in" style="animation-delay: 0.3s;">
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Your Journey</h3>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- GPA -->
+                    <div class="sanctuary-card p-6 rounded-4xl bg-gradient-to-br from-wiut-gold/10 to-transparent border border-wiut-gold/20 hover:shadow-xl hover:shadow-wiut-gold/10 transition-all duration-500">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-wiut-gold/20 flex items-center justify-center">
+                                <i data-lucide="award" class="w-5 h-5 text-wiut-gold"></i>
+                            </div>
+                            <span class="text-xs font-medium text-green-500 bg-green-50 px-2 py-1 rounded-full">+0.2</span>
+                        </div>
+                        <p class="text-4xl font-bold text-gray-900 mb-1">3.7</p>
+                        <p class="text-sm text-gray-400">Current GPA</p>
+                    </div>
+                    
+                    <!-- Credits -->
+                    <div class="sanctuary-card p-6 rounded-4xl bg-white/70 border border-gray-100 hover:bg-white hover:shadow-xl hover:shadow-gray-200/40 transition-all duration-500">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-wiut-blue/10 flex items-center justify-center">
+                                <i data-lucide="book-open" class="w-5 h-5 text-wiut-blue"></i>
+                            </div>
+                        </div>
+                        <p class="text-4xl font-bold text-gray-900 mb-1">84</p>
+                        <p class="text-sm text-gray-400">Credits Earned</p>
+                    </div>
+                    
+                    <!-- Modules -->
+                    <div class="sanctuary-card p-6 rounded-4xl bg-white/70 border border-gray-100 hover:bg-white hover:shadow-xl hover:shadow-gray-200/40 transition-all duration-500">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center">
+                                <i data-lucide="layers" class="w-5 h-5 text-purple-500"></i>
+                            </div>
+                        </div>
+                        <p class="text-4xl font-bold text-gray-900 mb-1">6</p>
+                        <p class="text-sm text-gray-400">Active Modules</p>
+                    </div>
+                    
+                    <!-- Assignments -->
+                    <div class="sanctuary-card p-6 rounded-4xl bg-gradient-to-br from-wiut-burgundy/10 to-transparent border border-wiut-burgundy/20 hover:shadow-xl hover:shadow-wiut-burgundy/10 transition-all duration-500">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-wiut-burgundy/20 flex items-center justify-center">
+                                <i data-lucide="clock" class="w-5 h-5 text-wiut-burgundy"></i>
+                            </div>
+                            <span class="text-xs font-medium text-wiut-burgundy bg-wiut-burgundy/10 px-2 py-1 rounded-full">2 urgent</span>
+                        </div>
+                        <p class="text-4xl font-bold text-gray-900 mb-1">4</p>
+                        <p class="text-sm text-gray-400">Pending Tasks</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Upcoming Deadlines -->
+            <section class="mb-8 fade-in" style="animation-delay: 0.4s;">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Upcoming Deadlines</h3>
+                    <a href="#" class="text-sm font-medium text-wiut-blue hover:underline">View all</a>
+                </div>
+                
+                <div class="space-y-3">
+                    <div class="deadline-item flex items-center p-4 rounded-3xl bg-white/70 border border-gray-100 hover:bg-white hover:shadow-lg hover:shadow-gray-200/40 transition-all duration-300 cursor-pointer group">
+                        <div class="w-12 h-12 rounded-2xl bg-wiut-burgundy/10 flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="file-text" class="w-5 h-5 text-wiut-burgundy"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-900">Statistics Report</h4>
+                            <p class="text-sm text-gray-400">CW1 • Business Statistics</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-bold text-wiut-burgundy">2 days</p>
+                            <p class="text-xs text-gray-400">Feb 7</p>
+                        </div>
+                    </div>
+                    
+                    <div class="deadline-item flex items-center p-4 rounded-3xl bg-white/70 border border-gray-100 hover:bg-white hover:shadow-lg hover:shadow-gray-200/40 transition-all duration-300 cursor-pointer group">
+                        <div class="w-12 h-12 rounded-2xl bg-wiut-gold/10 flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="pen-tool" class="w-5 h-5 text-wiut-gold"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-900">Economics Essay</h4>
+                            <p class="text-sm text-gray-400">CW2 Draft • Microeconomics</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-bold text-gray-600">5 days</p>
+                            <p class="text-xs text-gray-400">Feb 10</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Quick Actions -->
+            <section class="fade-in" style="animation-delay: 0.5s;">
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Quick Actions</h3>
+                
+                <div class="flex flex-wrap gap-3">
+                    <a href="#" class="quick-action inline-flex items-center space-x-2 px-5 py-3 rounded-full bg-white/70 border border-gray-100 hover:bg-wiut-blue hover:text-white hover:border-wiut-blue hover:shadow-lg hover:shadow-wiut-blue/30 transition-all duration-300 group">
+                        <i data-lucide="graduation-cap" class="w-4 h-4 text-wiut-blue group-hover:text-white transition-colors"></i>
+                        <span class="font-medium">LMS</span>
+                    </a>
+                    <a href="#" class="quick-action inline-flex items-center space-x-2 px-5 py-3 rounded-full bg-white/70 border border-gray-100 hover:bg-wiut-teal hover:text-white hover:border-wiut-teal hover:shadow-lg hover:shadow-wiut-teal/30 transition-all duration-300 group">
+                        <i data-lucide="calendar" class="w-4 h-4 text-wiut-teal group-hover:text-white transition-colors"></i>
+                        <span class="font-medium">Timetable</span>
+                    </a>
+                    <a href="#" class="quick-action inline-flex items-center space-x-2 px-5 py-3 rounded-full bg-white/70 border border-gray-100 hover:bg-wiut-gold hover:text-white hover:border-wiut-gold hover:shadow-lg hover:shadow-wiut-gold/30 transition-all duration-300 group">
+                        <i data-lucide="user" class="w-4 h-4 text-wiut-gold group-hover:text-white transition-colors"></i>
+                        <span class="font-medium">SRS</span>
+                    </a>
+                    <a href="#" class="quick-action inline-flex items-center space-x-2 px-5 py-3 rounded-full bg-white/70 border border-gray-100 hover:bg-wiut-burgundy hover:text-white hover:border-wiut-burgundy hover:shadow-lg hover:shadow-wiut-burgundy/30 transition-all duration-300 group">
+                        <i data-lucide="folder" class="w-4 h-4 text-wiut-burgundy group-hover:text-white transition-colors"></i>
+                        <span class="font-medium">Documents</span>
+                    </a>
+                    <a href="#" class="quick-action inline-flex items-center space-x-2 px-5 py-3 rounded-full bg-white/70 border border-gray-100 hover:bg-wiut-sky hover:text-white hover:border-wiut-sky hover:shadow-lg hover:shadow-wiut-sky/30 transition-all duration-300 group">
+                        <i data-lucide="book-open" class="w-4 h-4 text-wiut-sky group-hover:text-white transition-colors"></i>
+                        <span class="font-medium">Library</span>
+                    </a>
+                    <a href="#" class="quick-action inline-flex items-center space-x-2 px-5 py-3 rounded-full bg-white/70 border border-gray-100 hover:bg-wiut-forest hover:text-white hover:border-wiut-forest hover:shadow-lg hover:shadow-wiut-forest/30 transition-all duration-300 group">
+                        <i data-lucide="credit-card" class="w-4 h-4 text-wiut-forest group-hover:text-white transition-colors"></i>
+                        <span class="font-medium">Payments</span>
+                    </a>
+                </div>
+            </section>
+        </div>
+        
+        <!-- STAFF VIEW -->
+        <div class="workspace-view hidden" data-view="staff">
+            <section class="mb-8 fade-in" style="animation-delay: 0.2s;">
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Today's Teaching</h3>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div class="sanctuary-card p-6 rounded-4xl bg-white/70 border border-gray-100 hover:bg-white hover:shadow-xl hover:shadow-gray-200/40 transition-all duration-500">
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-wiut-blue/10 text-wiut-blue text-xs font-medium mb-3">
+                                    <span class="w-1.5 h-1.5 bg-wiut-blue rounded-full"></span>
+                                    <span>Now</span>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900">Business Statistics L1</h4>
+                                <p class="text-gray-400">Room 301 • 45 students</p>
+                            </div>
+                            <span class="text-2xl font-bold text-wiut-blue">09:00</span>
+                        </div>
+                        <button class="w-full py-3 rounded-2xl bg-wiut-blue text-white font-semibold hover:bg-wiut-blue/90 transition-colors">
+                            Open Class
+                        </button>
+                    </div>
+                    
+                    <div class="sanctuary-card p-6 rounded-4xl bg-white/70 border border-gray-100 hover:bg-white hover:shadow-xl hover:shadow-gray-200/40 transition-all duration-500">
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-gray-100 text-gray-500 text-xs font-medium mb-3">
+                                    <span>Later</span>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900">Research Methods S2</h4>
+                                <p class="text-gray-400">Room 205 • 28 students</p>
+                            </div>
+                            <span class="text-2xl font-bold text-gray-400">14:00</span>
+                        </div>
+                        <button class="w-full py-3 rounded-2xl bg-gray-100 text-gray-600 font-semibold hover:bg-gray-200 transition-colors">
+                            Prepare Materials
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="mb-8 fade-in" style="animation-delay: 0.3s;">
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Tasks Awaiting</h3>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="sanctuary-card p-6 rounded-4xl bg-gradient-to-br from-wiut-burgundy/10 to-transparent border border-wiut-burgundy/20">
+                        <div class="w-10 h-10 rounded-xl bg-wiut-burgundy/20 flex items-center justify-center mb-4">
+                            <i data-lucide="file-check" class="w-5 h-5 text-wiut-burgundy"></i>
+                        </div>
+                        <p class="text-4xl font-bold text-gray-900 mb-1">23</p>
+                        <p class="text-sm text-gray-400">Courseworks to Grade</p>
+                    </div>
+                    
+                    <div class="sanctuary-card p-6 rounded-4xl bg-gradient-to-br from-wiut-gold/10 to-transparent border border-wiut-gold/20">
+                        <div class="w-10 h-10 rounded-xl bg-wiut-gold/20 flex items-center justify-center mb-4">
+                            <i data-lucide="users" class="w-5 h-5 text-wiut-gold"></i>
+                        </div>
+                        <p class="text-4xl font-bold text-gray-900 mb-1">2</p>
+                        <p class="text-sm text-gray-400">Attendance Pending</p>
+                    </div>
+                    
+                    <div class="sanctuary-card p-6 rounded-4xl bg-gradient-to-br from-wiut-teal/10 to-transparent border border-wiut-teal/20">
+                        <div class="w-10 h-10 rounded-xl bg-wiut-teal/20 flex items-center justify-center mb-4">
+                            <i data-lucide="message-square" class="w-5 h-5 text-wiut-teal"></i>
+                        </div>
+                        <p class="text-4xl font-bold text-gray-900 mb-1">5</p>
+                        <p class="text-sm text-gray-400">Student Messages</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- ADMIN VIEW -->
+        <div class="workspace-view hidden" data-view="admin">
+            <section class="mb-8 fade-in" style="animation-delay: 0.2s;">
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">System Health</h3>
+                
+                <div class="sanctuary-card p-6 rounded-4xl bg-white/70 border border-gray-100">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                        <span class="font-semibold text-green-600">All Systems Operational</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center p-4 rounded-2xl bg-green-50">
+                            <p class="text-2xl font-bold text-green-600">99.9%</p>
+                            <p class="text-xs text-gray-500">LMS Uptime</p>
+                        </div>
+                        <div class="text-center p-4 rounded-2xl bg-green-50">
+                            <p class="text-2xl font-bold text-green-600">99.7%</p>
+                            <p class="text-xs text-gray-500">SRS Uptime</p>
+                        </div>
+                        <div class="text-center p-4 rounded-2xl bg-green-50">
+                            <p class="text-2xl font-bold text-green-600">100%</p>
+                            <p class="text-xs text-gray-500">DMS Uptime</p>
+                        </div>
+                        <div class="text-center p-4 rounded-2xl bg-wiut-blue/10">
+                            <p class="text-2xl font-bold text-wiut-blue">1,234</p>
+                            <p class="text-xs text-gray-500">Active Now</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="fade-in" style="animation-delay: 0.3s;">
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Quick Admin Actions</h3>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <button class="sanctuary-card p-6 rounded-4xl bg-white/70 border border-gray-100 hover:bg-white hover:shadow-xl hover:shadow-gray-200/40 transition-all duration-500 text-left group">
+                        <div class="w-12 h-12 rounded-2xl bg-wiut-blue/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="user-plus" class="w-6 h-6 text-wiut-blue"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-1">Add User</h4>
+                        <p class="text-sm text-gray-400">Create new account</p>
+                    </button>
+                    
+                    <button class="sanctuary-card p-6 rounded-4xl bg-white/70 border border-gray-100 hover:bg-white hover:shadow-xl hover:shadow-gray-200/40 transition-all duration-500 text-left group">
+                        <div class="w-12 h-12 rounded-2xl bg-wiut-teal/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="megaphone" class="w-6 h-6 text-wiut-teal"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-1">Announcement</h4>
+                        <p class="text-sm text-gray-400">Broadcast message</p>
+                    </button>
+                    
+                    <button class="sanctuary-card p-6 rounded-4xl bg-white/70 border border-gray-100 hover:bg-white hover:shadow-xl hover:shadow-gray-200/40 transition-all duration-500 text-left group">
+                        <div class="w-12 h-12 rounded-2xl bg-wiut-gold/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="bar-chart-3" class="w-6 h-6 text-wiut-gold"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-1">Reports</h4>
+                        <p class="text-sm text-gray-400">View analytics</p>
+                    </button>
+                </div>
+            </section>
+        </div>
+        
+        <!-- ============================================
+             FOOTER
+             ============================================ -->
+        <footer class="mt-20 pt-8 border-t border-gray-100 text-center fade-in" style="animation-delay: 0.6s;">
+            <p class="text-sm text-gray-400">
+                © 2026 Westminster International University in Tashkent
+            </p>
+            <p class="text-xs text-gray-300 mt-1">
+                WINET Sanctuary Edition — Designed with 💙
+            </p>
+        </footer>
+    </div>
+    
+    <!-- ============================================
+         AI ASSISTANT
+         ============================================ -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <div id="aiChat" class="hidden mb-4 w-96 max-w-[calc(100vw-3rem)] rounded-4xl bg-white shadow-2xl shadow-gray-300/50 border border-gray-100 overflow-hidden">
+            <div class="p-5 border-b border-gray-100 bg-gradient-to-r from-wiut-blue to-wiut-sky">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+                            <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white">WINET Assistant</h4>
+                            <p class="text-xs text-white/70">Here to help ✨</p>
+                        </div>
+                    </div>
+                    <button id="closeAI" class="p-2 hover:bg-white/10 rounded-xl transition-colors">
+                        <i data-lucide="x" class="w-5 h-5 text-white/70"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="aiMessages" class="h-72 overflow-y-auto p-5 space-y-4 bg-gray-50/50">
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-wiut-blue to-wiut-sky flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-white"></i>
+                    </div>
+                    <div class="bg-white rounded-2xl rounded-tl-none p-4 shadow-sm border border-gray-100">
+                        <p class="text-gray-700 text-sm">Hi John! 👋 How can I help you today?</p>
+                        <div class="mt-3 flex flex-wrap gap-2">
+                            <button class="ai-suggestion px-3 py-1.5 text-xs font-medium bg-wiut-blue/10 text-wiut-blue rounded-full hover:bg-wiut-blue/20 transition-colors">My schedule</button>
+                            <button class="ai-suggestion px-3 py-1.5 text-xs font-medium bg-wiut-teal/10 text-wiut-teal rounded-full hover:bg-wiut-teal/20 transition-colors">Check grades</button>
+                            <button class="ai-suggestion px-3 py-1.5 text-xs font-medium bg-wiut-burgundy/10 text-wiut-burgundy rounded-full hover:bg-wiut-burgundy/20 transition-colors">Deadlines</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 border-t border-gray-100 bg-white">
+                <div class="flex items-center space-x-3">
+                    <input type="text" id="aiInput" placeholder="Ask me anything..." class="flex-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 outline-none focus:border-wiut-blue focus:ring-2 focus:ring-wiut-blue/20 transition-all text-sm">
+                    <button id="aiSend" class="p-3 bg-gradient-to-r from-wiut-blue to-wiut-sky text-white rounded-xl hover:shadow-lg hover:shadow-wiut-blue/30 transition-all">
+                        <i data-lucide="send" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <button id="aiToggle" class="w-14 h-14 rounded-2xl bg-gradient-to-br from-wiut-blue to-wiut-sky text-white shadow-lg shadow-wiut-blue/30 hover:shadow-xl hover:shadow-wiut-blue/40 hover:scale-105 transition-all duration-300 flex items-center justify-center">
+            <i data-lucide="sparkles" class="w-6 h-6"></i>
+        </button>
+    </div>
+    
+    <!-- SVG Definitions -->
+    <svg class="absolute w-0 h-0">
+        <defs>
+            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#264F9D"/>
+                <stop offset="100%" stop-color="#4DACE1"/>
+            </linearGradient>
+        </defs>
+    </svg>
+    
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>

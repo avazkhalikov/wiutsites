@@ -1,0 +1,620 @@
+/* ============================================
+   WINET 3.0 - Ultimate Edition
+   Apple-Level Design Excellence
+   ============================================ */
+
+/* ----------------------------------------
+   CSS Custom Properties
+   ---------------------------------------- */
+:root {
+    /* WIUT Brand Colors */
+    --wiut-blue: #264F9D;
+    --wiut-burgundy: #C7293F;
+    --wiut-sky: #4DACE1;
+    --wiut-gold: #F6AC10;
+    --wiut-teal: #358A7C;
+    --wiut-forest: #0C6326;
+    
+    /* Dark Theme */
+    --dark-950: #030305;
+    --dark-900: #0a0a0f;
+    --dark-800: #12121a;
+    --dark-700: #1a1a24;
+    --dark-600: #24242f;
+    
+    /* Transitions */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ----------------------------------------
+   Base Styles
+   ---------------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    overflow-x: hidden;
+    cursor: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+/* Hide default cursor on interactive elements */
+a, button, input, [role="button"] {
+    cursor: none;
+}
+
+/* ----------------------------------------
+   Custom Cursor
+   ---------------------------------------- */
+#cursor {
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s var(--ease-out-expo), 
+                width 0.3s var(--ease-out-expo), 
+                height 0.3s var(--ease-out-expo),
+                border-color 0.3s ease;
+}
+
+#cursor.hover {
+    width: 50px;
+    height: 50px;
+    border-color: var(--wiut-gold);
+}
+
+#cursorDot {
+    transform: translate(-50%, -50%);
+}
+
+/* Mobile: Show normal cursor */
+@media (max-width: 768px) {
+    body, a, button, input, [role="button"] {
+        cursor: auto;
+    }
+    #cursor, #cursorDot {
+        display: none;
+    }
+}
+
+/* ----------------------------------------
+   Animated Gradient Orbs
+   ---------------------------------------- */
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    animation: float 20s ease-in-out infinite;
+    transition: opacity 0.5s ease;
+}
+
+/* Orbs have subtle opacity in light mode, stronger in dark mode */
+.orb {
+    opacity: 0.15;
+}
+
+html.dark .orb {
+    opacity: 0.3;
+}
+
+.orb-1 {
+    top: -10%;
+    left: -10%;
+    background: linear-gradient(135deg, var(--wiut-blue), var(--wiut-sky));
+    animation-delay: 0s;
+}
+
+.orb-2 {
+    top: 50%;
+    right: -15%;
+    background: linear-gradient(135deg, var(--wiut-teal), var(--wiut-forest));
+    animation-delay: -7s;
+    animation-duration: 25s;
+}
+
+.orb-3 {
+    bottom: -10%;
+    left: 30%;
+    background: linear-gradient(135deg, var(--wiut-burgundy), var(--wiut-gold));
+    animation-delay: -14s;
+    animation-duration: 30s;
+}
+
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(50px, -80px) scale(1.1);
+    }
+    50% {
+        transform: translate(-30px, 50px) scale(0.95);
+    }
+    75% {
+        transform: translate(-60px, -30px) scale(1.05);
+    }
+}
+
+/* ----------------------------------------
+   Text Gradient Animation
+   ---------------------------------------- */
+.text-gradient-animated {
+    background: linear-gradient(
+        90deg,
+        var(--wiut-sky),
+        var(--wiut-teal),
+        var(--wiut-gold),
+        var(--wiut-burgundy),
+        var(--wiut-blue),
+        var(--wiut-sky)
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-shift 8s ease infinite;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--wiut-sky), var(--wiut-teal));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* ----------------------------------------
+   Reveal Animations
+   ---------------------------------------- */
+.reveal-up {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: reveal-up 1s var(--ease-out-expo) forwards;
+    animation-delay: var(--delay, 0s);
+}
+
+@keyframes reveal-up {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ----------------------------------------
+   Scroll Indicator
+   ---------------------------------------- */
+@keyframes scroll {
+    0%, 100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(8px);
+        opacity: 0.5;
+    }
+}
+
+.animate-scroll {
+    animation: scroll 1.5s ease-in-out infinite;
+}
+
+/* ----------------------------------------
+   Role Switcher
+   ---------------------------------------- */
+.role-btn {
+    position: relative;
+    transition: all 0.5s var(--ease-out-expo);
+}
+
+.role-btn.active {
+    background: linear-gradient(135deg, var(--wiut-blue), var(--wiut-sky));
+    color: white !important;
+    box-shadow: 0 10px 40px -10px rgba(77, 172, 225, 0.5);
+}
+
+.role-btn:not(.active):hover {
+    background: #f1f5f9;
+}
+
+html.dark .role-btn:not(.active):hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Dark mode card glow effects */
+html.dark .bento-card-3d:hover > div {
+    box-shadow: 0 20px 60px -20px rgba(77, 172, 225, 0.15);
+}
+
+/* ----------------------------------------
+   3D Bento Cards
+   ---------------------------------------- */
+.bento-card-3d {
+    opacity: 0;
+    transform: translateY(60px) rotateX(10deg);
+    animation: bento-reveal 1s var(--ease-out-expo) forwards;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.bento-card-3d:nth-child(1) { animation-delay: 0.1s; }
+.bento-card-3d:nth-child(2) { animation-delay: 0.15s; }
+.bento-card-3d:nth-child(3) { animation-delay: 0.2s; }
+.bento-card-3d:nth-child(4) { animation-delay: 0.25s; }
+.bento-card-3d:nth-child(5) { animation-delay: 0.3s; }
+.bento-card-3d:nth-child(6) { animation-delay: 0.35s; }
+
+@keyframes bento-reveal {
+    to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+    }
+}
+
+.bento-card-3d > div {
+    transition: transform 0.6s var(--ease-out-expo), box-shadow 0.6s var(--ease-out-expo);
+}
+
+.bento-card-3d:hover > div {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.5);
+}
+
+/* ----------------------------------------
+   Stat Cards
+   ---------------------------------------- */
+.stat-card {
+    transition: all 0.5s var(--ease-out-expo);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ----------------------------------------
+   Photo Cards
+   ---------------------------------------- */
+.photo-card {
+    transition: all 0.6s var(--ease-out-expo);
+}
+
+.photo-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    z-index: 10;
+}
+
+/* ----------------------------------------
+   Service Tiles
+   ---------------------------------------- */
+.service-tile {
+    transition: all 0.5s var(--ease-out-expo);
+}
+
+.service-tile:hover {
+    transform: translateY(-12px);
+}
+
+/* ----------------------------------------
+   Magnetic Button Effect
+   ---------------------------------------- */
+.magnetic-btn {
+    transition: transform 0.3s var(--ease-out-expo);
+}
+
+/* ----------------------------------------
+   Progress Ring
+   ---------------------------------------- */
+.progress-ring {
+    transition: stroke-dashoffset 1.5s var(--ease-out-expo);
+}
+
+@keyframes progress-fill {
+    from {
+        stroke-dashoffset: 251.2;
+    }
+}
+
+.progress-ring {
+    animation: progress-fill 2s var(--ease-out-expo) forwards;
+    animation-delay: 0.5s;
+    stroke-dashoffset: 251.2;
+}
+
+/* ----------------------------------------
+   Counter Animation
+   ---------------------------------------- */
+.counter {
+    display: inline-block;
+}
+
+/* ----------------------------------------
+   Workspace Views
+   ---------------------------------------- */
+.workspace-view {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.workspace-view.hidden {
+    display: none;
+}
+
+.workspace-view:not(.hidden) {
+    animation: fadeIn 0.6s var(--ease-out-expo);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ----------------------------------------
+   Command Palette
+   ---------------------------------------- */
+#cmdPalette.show {
+    display: block;
+}
+
+#cmdPalette.show > div:first-child {
+    animation: fadeIn 0.2s ease;
+}
+
+#cmdPalette.show > div:last-child > div {
+    animation: scaleIn 0.3s var(--ease-out-expo);
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* ----------------------------------------
+   AI Chat Window
+   ---------------------------------------- */
+#aiChatWindow:not(.hidden) {
+    animation: chatOpen 0.4s var(--spring) forwards;
+}
+
+@keyframes chatOpen {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.bg-size-200 {
+    background-size: 200% 200%;
+}
+
+.animate-gradient {
+    animation: gradient-shift 3s ease infinite;
+}
+
+/* ----------------------------------------
+   Scrollbar
+   ---------------------------------------- */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.02);
+}
+
+/* ----------------------------------------
+   Selection
+   ---------------------------------------- */
+::selection {
+    background: var(--wiut-sky);
+    color: white;
+}
+
+/* ----------------------------------------
+   Notification
+   ---------------------------------------- */
+.winet-notification {
+    position: fixed;
+    bottom: 7rem;
+    right: 1.5rem;
+    z-index: 200;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, var(--wiut-blue), var(--wiut-sky));
+    color: white;
+    border-radius: 1rem;
+    font-weight: 500;
+    box-shadow: 0 20px 60px -20px rgba(38, 79, 157, 0.6);
+    transform: translateY(0);
+    opacity: 1;
+    transition: all 0.4s var(--ease-out-expo);
+}
+
+
+.winet-notification.hide {
+    transform: translateY(30px);
+    opacity: 0;
+}
+
+/* ----------------------------------------
+   Focus States
+   ---------------------------------------- */
+*:focus-visible {
+    outline: 2px solid var(--wiut-sky);
+    outline-offset: 2px;
+}
+
+/* ----------------------------------------
+   Reduced Motion
+   ---------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .bento-card-3d,
+    .reveal-up {
+        opacity: 1;
+        transform: none;
+    }
+    
+    .orb {
+        animation: none;
+    }
+}
+
+/* ----------------------------------------
+   Print Styles
+   ---------------------------------------- */
+@media print {
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    header,
+    footer,
+    #aiAssistant,
+    #cmdPalette,
+    .orb,
+    #cursor,
+    #cursorDot {
+        display: none !important;
+    }
+}
+
+/* ----------------------------------------
+   Loading State
+   ---------------------------------------- */
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.05) 25%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.05) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+    border-radius: 0.5rem;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ----------------------------------------
+   Glassmorphism Utilities
+   ---------------------------------------- */
+.glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ----------------------------------------
+   Hover Glow
+   ---------------------------------------- */
+.glow-on-hover {
+    position: relative;
+}
+
+.glow-on-hover::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, var(--wiut-blue), var(--wiut-sky), var(--wiut-teal));
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.5s ease;
+    filter: blur(20px);
+}
+
+.glow-on-hover:hover::before {
+    opacity: 0.5;
+}
+
+/* ----------------------------------------
+   Responsive Breakpoints
+   ---------------------------------------- */
+@media (max-width: 1024px) {
+    .bento-card-3d {
+        animation-delay: 0s !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .reveal-up {
+        --delay: 0s !important;
+    }
+}
+
+/* ----------------------------------------
+   Safe Area for Mobile
+   ---------------------------------------- */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    #aiAssistant {
+        bottom: calc(1.5rem + env(safe-area-inset-bottom));
+    }
+    
+    footer {
+        padding-bottom: calc(4rem + env(safe-area-inset-bottom));
+    }
+}

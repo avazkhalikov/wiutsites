@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WINET 3.0 - The Future of Education</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        wiut: {
+                            blue: '#264F9D',
+                            burgundy: '#C7293F',
+                            sky: '#4DACE1',
+                            gold: '#F6AC10',
+                            teal: '#358A7C',
+                            forest: '#0C6326',
+                        },
+                        dark: {
+                            950: '#030305',
+                            900: '#0a0a0f',
+                            800: '#12121a',
+                            700: '#1a1a24',
+                            600: '#24242f',
+                        }
+                    },
+                    fontFamily: {
+                        'display': ['Outfit', 'system-ui', 'sans-serif'],
+                        'body': ['Space Grotesk', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 dark:bg-dark-950 text-gray-900 dark:text-white font-body overflow-x-hidden transition-colors duration-300">
+    
+    <!-- ============================================
+         CUSTOM CURSOR
+         ============================================ -->
+    <div id="cursor" class="fixed w-5 h-5 border-2 border-wiut-sky rounded-full pointer-events-none z-[9999] mix-blend-difference transition-transform duration-100"></div>
+    <div id="cursorDot" class="fixed w-2 h-2 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference"></div>
+    
+    <!-- ============================================
+         ANIMATED GRADIENT MESH BACKGROUND
+         ============================================ -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <!-- Base gradient - changes with theme -->
+        <div class="absolute inset-0 bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 dark:opacity-100 opacity-0 transition-opacity duration-500"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 dark:opacity-0 opacity-100 transition-opacity duration-500"></div>
+        
+        <!-- Animated orbs -->
+        <div class="orb orb-1 absolute w-[800px] h-[800px] rounded-full blur-[120px]"></div>
+        <div class="orb orb-2 absolute w-[600px] h-[600px] rounded-full blur-[100px]"></div>
+        <div class="orb orb-3 absolute w-[500px] h-[500px] rounded-full blur-[80px]"></div>
+        
+        <!-- Grid pattern - subtle in both modes -->
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMikiIGQ9Ik0wIDBoNjB2NjBIMHoiLz48cGF0aCBkPSJNNjAgMEgwdjYwIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiIHN0cm9rZS13aWR0aD0iLjUiLz48L2c+PC9zdmc+')] dark:opacity-50 opacity-0"></div>
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9InJnYmEoMCwwLDAsMC4wMSkiIGQ9Ik0wIDBoNjB2NjBIMHoiLz48cGF0aCBkPSJNNjAgMEgwdjYwIiBzdHJva2U9InJnYmEoMCwwLDAsMC4wMikiIHN0cm9rZS13aWR0aD0iLjUiLz48L2c+PC9zdmc+')] dark:opacity-0 opacity-30"></div>
+    </div>
+    
+    <!-- ============================================
+         NAVIGATION - Floating Glass Header
+         ============================================ -->
+    <header class="fixed top-0 left-0 right-0 z-50 px-4 py-4">
+        <nav class="max-w-7xl mx-auto">
+            <div class="backdrop-blur-2xl bg-white/80 dark:bg-white/[0.03] border border-gray-200 dark:border-white/[0.08] rounded-2xl px-6 py-4 flex items-center justify-between shadow-xl dark:shadow-2xl shadow-gray-200/50 dark:shadow-black/20 transition-colors duration-300">
+                
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-3 group">
+                    <div class="relative">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-wiut-blue via-wiut-sky to-wiut-teal flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
+                            <span class="text-2xl font-display font-black text-white">W</span>
+                        </div>
+                        <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-wiut-blue via-wiut-sky to-wiut-teal blur-xl opacity-50 group-hover:opacity-80 transition-opacity"></div>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-display font-bold text-gray-900 dark:text-white">WINET</h1>
+                        <p class="text-[10px] text-gray-400 dark:text-white/40 tracking-widest uppercase">3.0 Ultimate</p>
+                    </div>
+                </a>
+                
+                <!-- Center Navigation -->
+                <div class="hidden lg:flex items-center space-x-1">
+                    <a href="#" class="nav-link px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/[0.08] transition-all duration-300">
+                        Home
+                    </a>
+                    <a href="#services" class="nav-link px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/[0.08] transition-all duration-300">
+                        Services
+                    </a>
+                    <a href="#community" class="nav-link px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/[0.08] transition-all duration-300">
+                        Community
+                    </a>
+                    <a href="#" class="nav-link px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/[0.08] transition-all duration-300">
+                        Directory
+                    </a>
+                </div>
+                
+                <!-- Right Side -->
+                <div class="flex items-center space-x-4">
+                    <!-- Command Search -->
+                    <button id="searchBtn" class="hidden sm:flex items-center space-x-3 px-4 py-2.5 rounded-xl bg-gray-100 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:border-gray-300 dark:hover:border-white/20 transition-all duration-300 group">
+                        <i data-lucide="search" class="w-4 h-4 text-gray-400 dark:text-white/40 group-hover:text-gray-600 dark:group-hover:text-white/70 transition-colors"></i>
+                        <span class="text-sm text-gray-400 dark:text-white/40 group-hover:text-gray-600 dark:group-hover:text-white/60">Search anything...</span>
+                        <kbd class="px-2 py-1 text-xs bg-gray-200 dark:bg-white/[0.08] rounded-lg text-gray-500 dark:text-white/30">⌘K</kbd>
+                    </button>
+                    
+                    <!-- Theme Toggle -->
+                    <button id="themeToggle" class="p-2.5 rounded-xl bg-gray-100 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:bg-gray-200 dark:hover:bg-white/[0.1] transition-all" title="Toggle theme">
+                        <i data-lucide="sun" class="w-5 h-5 text-wiut-gold hidden dark:block"></i>
+                        <i data-lucide="moon" class="w-5 h-5 text-wiut-blue block dark:hidden"></i>
+                    </button>
+                    
+                    <!-- Profile -->
+                    <div class="relative group">
+                        <button class="flex items-center space-x-3 p-1.5 rounded-2xl hover:bg-gray-100 dark:hover:bg-white/[0.05] transition-all duration-300">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Profile" class="w-10 h-10 rounded-xl object-cover ring-2 ring-gray-200 dark:ring-white/10 group-hover:ring-wiut-sky/50 transition-all duration-300">
+                                <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-dark-900"></span>
+                            </div>
+                            <div class="hidden md:block text-left">
+                                <p class="text-sm font-medium text-gray-900 dark:text-white/90" id="userName">John Doe</p>
+                                <p class="text-xs text-gray-500 dark:text-white/40" id="userRole">Student</p>
+                            </div>
+                            <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 dark:text-white/40 hidden md:block"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- ============================================
+         COMPACT GREETING BAR + ROLE SWITCHER
+         ============================================ -->
+    <section class="pt-28 pb-6 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                
+                <!-- Greeting -->
+                <div class="reveal-up" style="--delay: 0s">
+                    <h1 class="text-2xl sm:text-3xl font-display font-bold text-gray-900 dark:text-white">
+                        <span id="heroGreeting">Good morning,</span> <span class="text-gradient-animated" id="heroName">John</span>! 👋
+                    </h1>
+                    <p class="text-sm sm:text-base text-gray-500 dark:text-white/50 mt-1">
+                        <span id="heroDate">Thursday, February 5, 2026</span> • 
+                        <span class="text-gray-700 dark:text-white/80" id="heroSummary">3 classes today, 2 upcoming deadlines</span>
+                    </p>
+                </div>
+                
+                <!-- Role Switcher -->
+                <div class="flex items-center space-x-2 reveal-up" style="--delay: 0.1s">
+                    <div class="flex items-center p-1.5 rounded-2xl bg-gray-100 dark:bg-white/[0.03] border border-gray-200 dark:border-white/[0.08] backdrop-blur-2xl">
+                        <button class="role-btn active px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-500" data-role="student">
+                            <i data-lucide="graduation-cap" class="w-4 h-4 inline mr-1.5"></i>Student
+                        </button>
+                        <button class="role-btn px-4 py-2 rounded-xl text-sm font-semibold text-gray-500 dark:text-white/50 hover:text-gray-700 dark:hover:text-white/80 transition-all duration-500" data-role="staff">
+                            <i data-lucide="briefcase" class="w-4 h-4 inline mr-1.5"></i>Staff
+                        </button>
+                        <button class="role-btn px-4 py-2 rounded-xl text-sm font-semibold text-gray-500 dark:text-white/50 hover:text-gray-700 dark:hover:text-white/80 transition-all duration-500" data-role="admin">
+                            <i data-lucide="shield" class="w-4 h-4 inline mr-1.5"></i>Admin
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ============================================
+         WORKSPACE - 3D Bento Grid
+         ============================================ -->
+    <section id="services" class="relative px-4 pb-12">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- STUDENT VIEW -->
+            <div class="workspace-view" data-view="student">
+                <div class="grid grid-cols-12 gap-4 lg:gap-6 auto-rows-[minmax(180px,auto)]">
+                    
+                    <!-- Today's Schedule - Large Card -->
+                    <div class="col-span-12 lg:col-span-8 row-span-2 bento-card-3d group">
+                        <div class="h-full p-8 rounded-3xl bg-white dark:bg-dark-800/80 border border-gray-200 dark:border-white/[0.08] backdrop-blur-xl relative overflow-hidden shadow-lg dark:shadow-none transition-colors">
+                            <!-- Glow effect -->
+                            <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-wiut-sky/20 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                            
+                            <div class="relative z-10">
+                                <div class="flex items-start justify-between mb-8">
+                                    <div>
+                                        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-green-500/20 text-green-600 dark:text-green-400 text-xs font-medium mb-3">
+                                            <span class="w-2 h-2 bg-green-500 dark:bg-green-400 rounded-full animate-pulse"></span>
+                                            <span>Live Schedule</span>
+                                        </div>
+                                        <h3 class="text-2xl font-display font-bold text-gray-900 dark:text-white mb-1">Today's Classes</h3>
+                                        <p class="text-gray-500 dark:text-white/50">Thursday, February 5</p>
+                                    </div>
+                                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-wiut-sky/30 to-wiut-blue/30 flex items-center justify-center">
+                                        <i data-lucide="calendar" class="w-7 h-7 text-wiut-sky"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="space-y-4">
+                                    <div class="schedule-item group/item flex items-center p-4 rounded-2xl bg-wiut-blue/10 dark:bg-wiut-blue/20 border border-wiut-blue/20 dark:border-wiut-blue/30 hover:scale-[1.02] transition-transform cursor-pointer">
+                                        <div class="w-2 h-16 rounded-full bg-wiut-blue mr-4"></div>
+                                        <div class="flex-1">
+                                            <p class="font-semibold text-gray-900 dark:text-white">Business Statistics</p>
+                                            <p class="text-sm text-gray-500 dark:text-white/50">Room 301 • Dr. Sarah Smith</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <p class="font-medium text-wiut-blue dark:text-wiut-sky">09:00</p>
+                                            <p class="text-xs text-gray-400 dark:text-white/40">In Progress</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="schedule-item group/item flex items-center p-4 rounded-2xl bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:bg-gray-100 dark:hover:bg-white/[0.08] hover:scale-[1.02] transition-all cursor-pointer">
+                                        <div class="w-2 h-16 rounded-full bg-wiut-teal mr-4"></div>
+                                        <div class="flex-1">
+                                            <p class="font-semibold text-gray-900 dark:text-white">Microeconomics</p>
+                                            <p class="text-sm text-gray-500 dark:text-white/50">Room 205 • Prof. Johnson</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <p class="font-medium text-gray-700 dark:text-white/70">11:00</p>
+                                            <p class="text-xs text-gray-400 dark:text-white/40">2 hours</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="schedule-item group/item flex items-center p-4 rounded-2xl bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:bg-gray-100 dark:hover:bg-white/[0.08] hover:scale-[1.02] transition-all cursor-pointer">
+                                        <div class="w-2 h-16 rounded-full bg-wiut-gold mr-4"></div>
+                                        <div class="flex-1">
+                                            <p class="font-semibold text-gray-900 dark:text-white">Academic English</p>
+                                            <p class="text-sm text-gray-500 dark:text-white/50">Room 102 • Ms. Williams</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <p class="font-medium text-gray-700 dark:text-white/70">14:00</p>
+                                            <p class="text-xs text-gray-400 dark:text-white/40">5 hours</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Attendance Ring -->
+                    <div class="col-span-6 lg:col-span-4 bento-card-3d group">
+                        <div class="h-full p-6 rounded-3xl bg-white dark:bg-wiut-teal/10 border border-gray-200 dark:border-wiut-teal/30 backdrop-blur-xl relative overflow-hidden flex flex-col justify-center items-center shadow-lg dark:shadow-none transition-colors">
+                            <div class="absolute inset-0 bg-gradient-to-t from-wiut-teal/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <div class="relative">
+                                <svg class="w-32 h-32 transform -rotate-90" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="40" fill="none" class="stroke-gray-200 dark:stroke-white/10" stroke-width="8"/>
+                                    <circle cx="50" cy="50" r="40" fill="none" stroke="url(#gradient-teal)" stroke-width="8" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="20" class="progress-ring"/>
+                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="text-center">
+                                        <span class="text-4xl font-display font-bold text-gray-900 dark:text-white counter" data-target="92">0</span>
+                                        <span class="text-2xl text-wiut-teal">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-500 dark:text-white/50 mt-4 font-medium">Attendance Rate</p>
+                        </div>
+                    </div>
+                    
+                    <!-- GPA Card -->
+                    <div class="col-span-6 lg:col-span-4 bento-card-3d group">
+                        <div class="h-full p-6 rounded-3xl bg-white dark:bg-wiut-gold/10 border border-gray-200 dark:border-wiut-gold/30 backdrop-blur-xl relative overflow-hidden flex flex-col justify-center items-center shadow-lg dark:shadow-none transition-colors">
+                            <div class="absolute inset-0 bg-gradient-to-t from-wiut-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <div class="text-center relative z-10">
+                                <div class="text-6xl font-display font-black text-gray-900 dark:text-white mb-2">
+                                    <span class="counter" data-target="3.7">0</span>
+                                </div>
+                                <p class="text-gray-500 dark:text-white/50 font-medium">Current GPA</p>
+                                <div class="flex items-center justify-center space-x-1 mt-3">
+                                    <i data-lucide="trending-up" class="w-4 h-4 text-green-500 dark:text-green-400"></i>
+                                    <span class="text-sm text-green-500 dark:text-green-400">+0.2 from last</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Deadlines Card -->
+                    <div class="col-span-12 md:col-span-6 lg:col-span-4 bento-card-3d group">
+                        <div class="h-full p-6 rounded-3xl bg-white dark:bg-wiut-burgundy/10 border border-gray-200 dark:border-wiut-burgundy/30 backdrop-blur-xl relative overflow-hidden shadow-lg dark:shadow-none transition-colors">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-wiut-burgundy/20 rounded-full blur-2xl"></div>
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-between mb-6">
+                                    <h3 class="text-xl font-display font-bold text-gray-900 dark:text-white">Deadlines</h3>
+                                    <span class="px-3 py-1 rounded-full bg-wiut-burgundy/20 dark:bg-wiut-burgundy/30 text-wiut-burgundy text-xs font-bold">2 Urgent</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-white/[0.05]">
+                                        <div>
+                                            <p class="font-medium text-gray-900 dark:text-white text-sm">Statistics Report</p>
+                                            <p class="text-xs text-gray-400 dark:text-white/40">CW1 Submission</p>
+                                        </div>
+                                        <span class="text-wiut-burgundy font-bold text-sm">2d</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-white/[0.05]">
+                                        <div>
+                                            <p class="font-medium text-gray-900 dark:text-white text-sm">Economics Essay</p>
+                                            <p class="text-xs text-gray-400 dark:text-white/40">CW2 Draft</p>
+                                        </div>
+                                        <span class="text-gray-500 dark:text-white/60 font-bold text-sm">5d</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="col-span-12 md:col-span-6 lg:col-span-4 bento-card-3d group">
+                        <div class="h-full p-6 rounded-3xl bg-white dark:bg-dark-800/80 border border-gray-200 dark:border-white/[0.08] backdrop-blur-xl shadow-lg dark:shadow-none transition-colors">
+                            <h3 class="text-xl font-display font-bold text-gray-900 dark:text-white mb-6">Quick Actions</h3>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button class="action-btn p-4 rounded-2xl bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:border-wiut-blue/50 hover:bg-wiut-blue/10 transition-all group/btn">
+                                    <i data-lucide="upload" class="w-6 h-6 text-wiut-blue mb-2 group-hover/btn:scale-110 transition-transform"></i>
+                                    <p class="text-sm font-medium text-gray-600 dark:text-white/70">Submit</p>
+                                </button>
+                                <button class="action-btn p-4 rounded-2xl bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:border-wiut-teal/50 hover:bg-wiut-teal/10 transition-all group/btn">
+                                    <i data-lucide="file-text" class="w-6 h-6 text-wiut-teal mb-2 group-hover/btn:scale-110 transition-transform"></i>
+                                    <p class="text-sm font-medium text-gray-600 dark:text-white/70">Grades</p>
+                                </button>
+                                <button class="action-btn p-4 rounded-2xl bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:border-wiut-gold/50 hover:bg-wiut-gold/10 transition-all group/btn">
+                                    <i data-lucide="book-open" class="w-6 h-6 text-wiut-gold mb-2 group-hover/btn:scale-110 transition-transform"></i>
+                                    <p class="text-sm font-medium text-gray-600 dark:text-white/70">Library</p>
+                                </button>
+                                <button class="action-btn p-4 rounded-2xl bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:border-wiut-burgundy/50 hover:bg-wiut-burgundy/10 transition-all group/btn">
+                                    <i data-lucide="headphones" class="w-6 h-6 text-wiut-burgundy mb-2 group-hover/btn:scale-110 transition-transform"></i>
+                                    <p class="text-sm font-medium text-gray-600 dark:text-white/70">Support</p>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- STAFF VIEW -->
+            <div class="workspace-view hidden" data-view="staff">
+                <div class="grid grid-cols-12 gap-4 lg:gap-6 auto-rows-[minmax(180px,auto)]">
+                    <!-- Teaching Today -->
+                    <div class="col-span-12 lg:col-span-6 row-span-2 bento-card-3d">
+                        <div class="h-full p-8 rounded-3xl bg-white dark:bg-dark-800/80 border border-gray-200 dark:border-white/[0.08] backdrop-blur-xl shadow-lg dark:shadow-none transition-colors">
+                            <div class="flex items-start justify-between mb-6">
+                                <div>
+                                    <h3 class="text-2xl font-display font-bold text-gray-900 dark:text-white mb-1">Teaching Today</h3>
+                                    <p class="text-gray-500 dark:text-white/50">2 sessions scheduled</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-wiut-blue/30 to-wiut-sky/30 flex items-center justify-center">
+                                    <i data-lucide="presentation" class="w-6 h-6 text-wiut-sky"></i>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="p-4 rounded-2xl bg-wiut-blue/10 dark:bg-wiut-blue/20 border border-wiut-blue/20 dark:border-wiut-blue/30">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <p class="font-semibold text-gray-900 dark:text-white">Business Statistics L1</p>
+                                        <span class="text-wiut-blue dark:text-wiut-sky font-medium">09:00</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500 dark:text-white/50">Room 301 • 45 students</p>
+                                </div>
+                                <div class="p-4 rounded-2xl bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08]">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <p class="font-semibold text-gray-900 dark:text-white">Business Statistics S2</p>
+                                        <span class="text-gray-600 dark:text-white/60 font-medium">14:00</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500 dark:text-white/50">Room 205 • 28 students</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pending Tasks -->
+                    <div class="col-span-12 lg:col-span-6 bento-card-3d">
+                        <div class="h-full p-6 rounded-3xl bg-white dark:bg-wiut-burgundy/10 border border-gray-200 dark:border-wiut-burgundy/30 backdrop-blur-xl shadow-lg dark:shadow-none transition-colors">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-xl font-display font-bold text-gray-900 dark:text-white">Pending Tasks</h3>
+                                <span class="px-3 py-1 rounded-full bg-wiut-burgundy/20 dark:bg-wiut-burgundy/30 text-wiut-burgundy text-xs font-bold">5 items</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-white/[0.05]">
+                                    <div class="flex items-center space-x-3">
+                                        <i data-lucide="file-check" class="w-5 h-5 text-wiut-burgundy"></i>
+                                        <span class="text-gray-700 dark:text-white/80">Coursework to grade</span>
+                                    </div>
+                                    <span class="text-wiut-burgundy font-bold">23</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-white/[0.05]">
+                                    <div class="flex items-center space-x-3">
+                                        <i data-lucide="user-check" class="w-5 h-5 text-wiut-gold"></i>
+                                        <span class="text-gray-700 dark:text-white/80">Attendance pending</span>
+                                    </div>
+                                    <span class="text-wiut-gold font-bold">2</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- My Modules -->
+                    <div class="col-span-12 lg:col-span-6 bento-card-3d">
+                        <div class="h-full p-6 rounded-3xl bg-white dark:bg-dark-800/80 border border-gray-200 dark:border-white/[0.08] backdrop-blur-xl shadow-lg dark:shadow-none transition-colors">
+                            <h3 class="text-xl font-display font-bold text-gray-900 dark:text-white mb-6">My Modules</h3>
+                            <div class="space-y-3">
+                                <a href="#" class="flex items-center p-4 rounded-2xl bg-gray-50 dark:bg-white/[0.05] hover:bg-gray-100 dark:hover:bg-white/[0.08] transition-all group">
+                                    <div class="flex-1">
+                                        <p class="font-medium text-gray-900 dark:text-white group-hover:text-wiut-blue dark:group-hover:text-wiut-sky transition-colors">4BUSS001W Business Statistics</p>
+                                        <p class="text-sm text-gray-400 dark:text-white/40">Level 4 • 156 students</p>
+                                    </div>
+                                    <i data-lucide="chevron-right" class="w-5 h-5 text-gray-300 dark:text-white/30 group-hover:text-wiut-blue dark:group-hover:text-wiut-sky group-hover:translate-x-1 transition-all"></i>
+                                </a>
+                                <a href="#" class="flex items-center p-4 rounded-2xl bg-gray-50 dark:bg-white/[0.05] hover:bg-gray-100 dark:hover:bg-white/[0.08] transition-all group">
+                                    <div class="flex-1">
+                                        <p class="font-medium text-gray-900 dark:text-white group-hover:text-wiut-blue dark:group-hover:text-wiut-sky transition-colors">5BUSS002W Research Methods</p>
+                                        <p class="text-sm text-gray-400 dark:text-white/40">Level 5 • 89 students</p>
+                                    </div>
+                                    <i data-lucide="chevron-right" class="w-5 h-5 text-gray-300 dark:text-white/30 group-hover:text-wiut-blue dark:group-hover:text-wiut-sky group-hover:translate-x-1 transition-all"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ADMIN VIEW -->
+            <div class="workspace-view hidden" data-view="admin">
+                <div class="grid grid-cols-12 gap-4 lg:gap-6 auto-rows-[minmax(180px,auto)]">
+                    <!-- System Status -->
+                    <div class="col-span-12 lg:col-span-8 bento-card-3d">
+                        <div class="h-full p-8 rounded-3xl bg-white dark:bg-dark-800/80 border border-gray-200 dark:border-white/[0.08] backdrop-blur-xl shadow-lg dark:shadow-none transition-colors">
+                            <div class="flex items-start justify-between mb-8">
+                                <div>
+                                    <h3 class="text-2xl font-display font-bold text-gray-900 dark:text-white mb-1">System Status</h3>
+                                    <p class="text-gray-500 dark:text-white/50">All systems operational</p>
+                                </div>
+                                <div class="flex items-center space-x-2 px-4 py-2 rounded-full bg-green-500/20">
+                                    <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+                                    <span class="text-green-600 dark:text-green-400 font-medium">Healthy</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div class="p-4 rounded-2xl bg-gray-50 dark:bg-white/[0.05] text-center">
+                                    <div class="text-2xl font-bold text-green-600 dark:text-green-400 mb-1">99.9%</div>
+                                    <div class="text-sm text-gray-400 dark:text-white/40">LMS Uptime</div>
+                                </div>
+                                <div class="p-4 rounded-2xl bg-gray-50 dark:bg-white/[0.05] text-center">
+                                    <div class="text-2xl font-bold text-green-600 dark:text-green-400 mb-1">99.7%</div>
+                                    <div class="text-sm text-gray-400 dark:text-white/40">SRS Uptime</div>
+                                </div>
+                                <div class="p-4 rounded-2xl bg-gray-50 dark:bg-white/[0.05] text-center">
+                                    <div class="text-2xl font-bold text-green-600 dark:text-green-400 mb-1">100%</div>
+                                    <div class="text-sm text-gray-400 dark:text-white/40">DMS Uptime</div>
+                                </div>
+                                <div class="p-4 rounded-2xl bg-gray-50 dark:bg-white/[0.05] text-center">
+                                    <div class="text-2xl font-bold text-wiut-gold mb-1">1,234</div>
+                                    <div class="text-sm text-gray-400 dark:text-white/40">Active Now</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Admin Actions -->
+                    <div class="col-span-12 lg:col-span-4 bento-card-3d">
+                        <div class="h-full p-6 rounded-3xl bg-white dark:bg-dark-800/80 border border-gray-200 dark:border-white/[0.08] backdrop-blur-xl shadow-lg dark:shadow-none transition-colors">
+                            <h3 class="text-xl font-display font-bold text-gray-900 dark:text-white mb-6">Quick Actions</h3>
+                            <div class="space-y-3">
+                                <button class="w-full flex items-center p-4 rounded-2xl bg-gray-50 dark:bg-white/[0.05] hover:bg-wiut-blue/10 dark:hover:bg-wiut-blue/20 border border-gray-200 dark:border-white/[0.08] hover:border-wiut-blue/50 transition-all group">
+                                    <i data-lucide="user-plus" class="w-5 h-5 text-wiut-blue mr-3"></i>
+                                    <span class="text-gray-700 dark:text-white/80 group-hover:text-gray-900 dark:group-hover:text-white">Add User</span>
+                                </button>
+                                <button class="w-full flex items-center p-4 rounded-2xl bg-gray-50 dark:bg-white/[0.05] hover:bg-wiut-teal/10 dark:hover:bg-wiut-teal/20 border border-gray-200 dark:border-white/[0.08] hover:border-wiut-teal/50 transition-all group">
+                                    <i data-lucide="megaphone" class="w-5 h-5 text-wiut-teal mr-3"></i>
+                                    <span class="text-gray-700 dark:text-white/80 group-hover:text-gray-900 dark:group-hover:text-white">Announcement</span>
+                                </button>
+                                <button class="w-full flex items-center p-4 rounded-2xl bg-gray-50 dark:bg-white/[0.05] hover:bg-wiut-gold/10 dark:hover:bg-wiut-gold/20 border border-gray-200 dark:border-white/[0.08] hover:border-wiut-gold/50 transition-all group">
+                                    <i data-lucide="file-cog" class="w-5 h-5 text-wiut-gold mr-3"></i>
+                                    <span class="text-gray-700 dark:text-white/80 group-hover:text-gray-900 dark:group-hover:text-white">Reports</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ============================================
+         COMMUNITY SECTION - Photo Grid
+         ============================================ -->
+    <section id="community" class="relative px-4 py-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- Section Header -->
+            <div class="text-center mb-16 reveal-up">
+                <h2 class="text-4xl sm:text-5xl font-display font-bold mb-4 text-gray-900 dark:text-white">
+                    Meet Our <span class="text-gradient">Community</span>
+                </h2>
+                <p class="text-gray-500 dark:text-white/50 max-w-xl mx-auto">The brilliant minds shaping the future at WIUT</p>
+            </div>
+            
+            <!-- Photo Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Person 1 -->
+                <div class="group relative rounded-3xl overflow-hidden aspect-[3/4] photo-card">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=600&fit=crop" alt="Student" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                        <h4 class="text-lg font-display font-bold text-white">Nilufar K.</h4>
+                        <p class="text-sm text-wiut-sky">Business Administration</p>
+                    </div>
+                </div>
+                
+                <!-- Person 2 -->
+                <div class="group relative rounded-3xl overflow-hidden aspect-[3/4] photo-card mt-8 md:mt-12">
+                    <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&h=600&fit=crop" alt="Professor" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                        <h4 class="text-lg font-display font-bold text-white">Dr. James M.</h4>
+                        <p class="text-sm text-wiut-gold">Professor of Economics</p>
+                    </div>
+                </div>
+                
+                <!-- Person 3 -->
+                <div class="group relative rounded-3xl overflow-hidden aspect-[3/4] photo-card">
+                    <img src="https://images.unsplash.com/photo-1529470839332-78ad660a6a82?w=400&h=600&fit=crop" alt="Student" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                        <h4 class="text-lg font-display font-bold text-white">Sardor A.</h4>
+                        <p class="text-sm text-wiut-teal">Computer Science</p>
+                    </div>
+                </div>
+                
+                <!-- Person 4 -->
+                <div class="group relative rounded-3xl overflow-hidden aspect-[3/4] photo-card mt-8 md:mt-12">
+                    <img src="https://images.unsplash.com/photo-1580894894513-541e068a3e2b?w=400&h=600&fit=crop" alt="Professor" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                        <h4 class="text-lg font-display font-bold text-white">Prof. Elena S.</h4>
+                        <p class="text-sm text-wiut-burgundy">Head of Research</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Second Row -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                <!-- Person 5 -->
+                <div class="group relative rounded-3xl overflow-hidden aspect-[3/4] photo-card md:mt-0 mt-0">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=600&fit=crop" alt="Students Group" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                        <h4 class="text-lg font-display font-bold text-white">Study Groups</h4>
+                        <p class="text-sm text-wiut-sky">Collaborative Learning</p>
+                    </div>
+                </div>
+                
+                <!-- Person 6 -->
+                <div class="group relative rounded-3xl overflow-hidden aspect-[3/4] photo-card mt-0 md:-mt-8">
+                    <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=400&h=600&fit=crop" alt="Student" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                        <h4 class="text-lg font-display font-bold text-white">Aziz T.</h4>
+                        <p class="text-sm text-wiut-gold">Finance Major</p>
+                    </div>
+                </div>
+                
+                <!-- Person 7 -->
+                <div class="group relative rounded-3xl overflow-hidden aspect-[3/4] photo-card">
+                    <img src="https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?w=400&h=600&fit=crop" alt="Professor" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                        <h4 class="text-lg font-display font-bold text-white">Dr. Amina R.</h4>
+                        <p class="text-sm text-wiut-teal">Law Department</p>
+                    </div>
+                </div>
+                
+                <!-- Person 8 -->
+                <div class="group relative rounded-3xl overflow-hidden aspect-[3/4] photo-card mt-0 md:-mt-8">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=600&fit=crop" alt="Staff" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                        <h4 class="text-lg font-display font-bold text-white">Mr. David L.</h4>
+                        <p class="text-sm text-wiut-burgundy">Career Services</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ============================================
+         SERVICES TILES - Floating Cards
+         ============================================ -->
+    <section class="relative px-4 py-24">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- Section Header -->
+            <div class="text-center mb-16 reveal-up">
+                <h2 class="text-4xl sm:text-5xl font-display font-bold mb-4 text-gray-900 dark:text-white">
+                    Essential <span class="text-gradient">Services</span>
+                </h2>
+                <p class="text-gray-500 dark:text-white/50 max-w-xl mx-auto">Quick access to all your university tools</p>
+            </div>
+            
+            <!-- Service Cards Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                
+                <a href="#" class="service-tile group p-6 rounded-3xl bg-white dark:bg-dark-800/80 border border-gray-200 dark:border-white/[0.08] backdrop-blur-xl hover:bg-wiut-blue/10 hover:border-wiut-blue/50 transition-all duration-500 text-center shadow-lg dark:shadow-none">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-wiut-blue to-wiut-sky flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg shadow-wiut-blue/30">
+                        <i data-lucide="graduation-cap" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h4 class="font-display font-bold text-gray-900 dark:text-white group-hover:text-wiut-blue dark:group-hover:text-wiut-sky transition-colors">LMS</h4>
+                    <p class="text-xs text-gray-400 dark:text-white/40 mt-1">Learning</p>
+                </a>
+                
+                <a href="#" class="service-tile group p-6 rounded-3xl bg-white dark:bg-dark-800/80 border border-gray-200 dark:border-white/[0.08] backdrop-blur-xl hover:bg-wiut-teal/10 hover:border-wiut-teal/50 transition-all duration-500 text-center shadow-lg dark:shadow-none">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-wiut-teal to-wiut-forest flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg shadow-wiut-teal/30">
+                        <i data-lucide="calendar-days" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h4 class="font-display font-bold text-gray-900 dark:text-white group-hover:text-wiut-teal transition-colors">Timetable</h4>
+                    <p class="text-xs text-gray-400 dark:text-white/40 mt-1">Schedule</p>
+                </a>
+                
+                <a href="#" class="service-tile group p-6 rounded-3xl bg-white dark:bg-dark-800/80 border border-gray-200 dark:border-white/[0.08] backdrop-blur-xl hover:bg-wiut-gold/10 hover:border-wiut-gold/50 transition-all duration-500 text-center shadow-lg dark:shadow-none">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-wiut-gold to-amber-500 flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg shadow-wiut-gold/30">
+                        <i data-lucide="user-circle" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h4 class="font-display font-bold text-gray-900 dark:text-white group-hover:text-wiut-gold transition-colors">SRS</h4>
+                    <p class="text-xs text-gray-400 dark:text-white/40 mt-1">Records</p>
+                </a>
+                
+                <a href="#" class="service-tile group p-6 rounded-3xl bg-white dark:bg-dark-800/80 border border-gray-200 dark:border-white/[0.08] backdrop-blur-xl hover:bg-wiut-burgundy/10 hover:border-wiut-burgundy/50 transition-all duration-500 text-center shadow-lg dark:shadow-none">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-wiut-burgundy to-rose-600 flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg shadow-wiut-burgundy/30">
+                        <i data-lucide="folder-open" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h4 class="font-display font-bold text-gray-900 dark:text-white group-hover:text-wiut-burgundy transition-colors">DMS</h4>
+                    <p class="text-xs text-gray-400 dark:text-white/40 mt-1">Documents</p>
+                </a>
+                
+                <a href="#" class="service-tile group p-6 rounded-3xl bg-white dark:bg-dark-800/80 border border-gray-200 dark:border-white/[0.08] backdrop-blur-xl hover:bg-wiut-sky/10 hover:border-wiut-sky/50 transition-all duration-500 text-center shadow-lg dark:shadow-none">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-wiut-sky to-cyan-400 flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg shadow-wiut-sky/30">
+                        <i data-lucide="book-open" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h4 class="font-display font-bold text-gray-900 dark:text-white group-hover:text-wiut-sky transition-colors">Library</h4>
+                    <p class="text-xs text-gray-400 dark:text-white/40 mt-1">Resources</p>
+                </a>
+                
+                <a href="#" class="service-tile group p-6 rounded-3xl bg-white dark:bg-dark-800/80 border border-gray-200 dark:border-white/[0.08] backdrop-blur-xl hover:bg-purple-500/10 hover:border-purple-500/50 transition-all duration-500 text-center shadow-lg dark:shadow-none">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg shadow-purple-500/30">
+                        <i data-lucide="mail" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h4 class="font-display font-bold text-gray-900 dark:text-white group-hover:text-purple-500 dark:group-hover:text-purple-400 transition-colors">Email</h4>
+                    <p class="text-xs text-gray-400 dark:text-white/40 mt-1">Outlook</p>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ============================================
+         FOOTER - Minimal & Elegant
+         ============================================ -->
+    <footer class="relative px-4 py-16 border-t border-gray-200 dark:border-white/[0.05]">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                
+                <!-- Logo & Info -->
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-wiut-blue to-wiut-sky flex items-center justify-center">
+                        <span class="text-2xl font-display font-black text-white">W</span>
+                    </div>
+                    <div>
+                        <p class="font-display font-bold text-gray-900 dark:text-white">Westminster International University</p>
+                        <p class="text-sm text-gray-500 dark:text-white/40">in Tashkent • Accredited by University of Westminster, UK</p>
+                    </div>
+                </div>
+                
+                <!-- Links -->
+                <div class="flex items-center space-x-8 text-sm text-gray-500 dark:text-white/50">
+                    <a href="#" class="hover:text-gray-900 dark:hover:text-white transition-colors">Help</a>
+                    <a href="#" class="hover:text-gray-900 dark:hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-gray-900 dark:hover:text-white transition-colors">Contact IT</a>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-200 dark:border-white/[0.05] text-center">
+                <p class="text-sm text-gray-400 dark:text-white/30">© 2026 WIUT. All rights reserved. <span class="text-gradient font-semibold">WINET 3.0 Ultimate Edition</span></p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- ============================================
+         AI ASSISTANT WIDGET
+         ============================================ -->
+    <div id="aiAssistant" class="fixed bottom-6 right-6 z-[60]">
+        <!-- Chat Window -->
+        <div id="aiChatWindow" class="hidden mb-4 w-[400px] max-w-[calc(100vw-3rem)] rounded-3xl shadow-2xl overflow-hidden border border-gray-200 dark:border-white/10 backdrop-blur-2xl bg-white dark:bg-dark-800">
+            <!-- Header -->
+            <div class="relative p-5 border-b border-gray-200 dark:border-white/10 overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-r from-wiut-blue via-wiut-sky to-wiut-teal opacity-20"></div>
+                <div class="relative flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-wiut-blue to-wiut-sky flex items-center justify-center shadow-lg shadow-wiut-blue/30">
+                            <i data-lucide="bot" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-gray-900 dark:text-white">WINET AI</h3>
+                            <p class="text-xs text-gray-500 dark:text-white/50 flex items-center space-x-1">
+                                <span class="w-2 h-2 bg-green-500 dark:bg-green-400 rounded-full animate-pulse"></span>
+                                <span>Always here to help</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button id="aiChatClose" class="p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-xl transition-colors">
+                        <i data-lucide="x" class="w-5 h-5 text-gray-400 dark:text-white/50"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Messages -->
+            <div id="aiChatMessages" class="h-80 overflow-y-auto p-5 space-y-4 bg-gray-50 dark:bg-dark-900/50">
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-wiut-blue to-wiut-sky flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="bg-white dark:bg-white/[0.05] rounded-2xl rounded-tl-none p-4 border border-gray-200 dark:border-white/[0.08] shadow-sm dark:shadow-none">
+                            <p class="text-gray-700 dark:text-white/80 text-sm">Hey there! 👋 I'm your personal WINET assistant. How can I help you today?</p>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <button class="ai-quick-btn px-3 py-1.5 text-xs font-medium bg-wiut-blue/10 dark:bg-wiut-blue/20 text-wiut-blue dark:text-wiut-sky rounded-full hover:bg-wiut-blue/20 dark:hover:bg-wiut-blue/30 transition-colors">📅 My schedule</button>
+                                <button class="ai-quick-btn px-3 py-1.5 text-xs font-medium bg-wiut-teal/10 dark:bg-wiut-teal/20 text-wiut-teal rounded-full hover:bg-wiut-teal/20 dark:hover:bg-wiut-teal/30 transition-colors">📊 Grades</button>
+                                <button class="ai-quick-btn px-3 py-1.5 text-xs font-medium bg-wiut-burgundy/10 dark:bg-wiut-burgundy/20 text-wiut-burgundy rounded-full hover:bg-wiut-burgundy/20 dark:hover:bg-wiut-burgundy/30 transition-colors">⏰ Deadlines</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Input -->
+            <div class="p-4 border-t border-gray-200 dark:border-white/10 bg-white dark:bg-dark-800">
+                <div class="flex items-center space-x-3">
+                    <input type="text" id="aiChatInput" placeholder="Ask me anything..." class="flex-1 px-4 py-3 bg-gray-100 dark:bg-white/[0.05] border border-gray-200 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-white/30 outline-none focus:border-wiut-blue dark:focus:border-wiut-sky/50 transition-all text-sm">
+                    <button id="aiSendBtn" class="p-3 bg-gradient-to-r from-wiut-blue to-wiut-sky text-white rounded-xl hover:shadow-lg hover:shadow-wiut-blue/30 transition-all">
+                        <i data-lucide="send" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating Button -->
+        <button id="aiChatToggle" class="group relative w-16 h-16 rounded-2xl shadow-2xl shadow-wiut-blue/40 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-wiut-blue via-wiut-sky to-wiut-teal bg-size-200 animate-gradient"></div>
+            <div class="relative flex items-center justify-center w-full h-full">
+                <i data-lucide="sparkles" class="w-7 h-7 text-white group-hover:scale-110 transition-transform" id="aiIconOpen"></i>
+                <i data-lucide="x" class="w-7 h-7 text-white hidden" id="aiIconClose"></i>
+            </div>
+            <span class="absolute -top-1 -right-1 w-5 h-5 bg-wiut-burgundy text-white text-xs font-bold rounded-full flex items-center justify-center animate-pulse shadow-lg">1</span>
+        </button>
+    </div>
+    
+    <!-- ============================================
+         COMMAND PALETTE
+         ============================================ -->
+    <div id="cmdPalette" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-gray-900/50 dark:bg-dark-950/80 backdrop-blur-xl" id="cmdOverlay"></div>
+        <div class="relative flex items-start justify-center pt-[15vh]">
+            <div class="w-full max-w-2xl mx-4 rounded-3xl bg-white dark:bg-dark-800 border border-gray-200 dark:border-white/10 shadow-2xl overflow-hidden">
+                <div class="flex items-center p-5 border-b border-gray-200 dark:border-white/10">
+                    <i data-lucide="search" class="w-5 h-5 text-gray-400 dark:text-white/40 mr-3"></i>
+                    <input type="text" id="cmdInput" placeholder="Search for anything..." class="flex-1 bg-transparent text-gray-900 dark:text-white text-lg outline-none placeholder-gray-400 dark:placeholder-white/30">
+                    <kbd class="px-3 py-1.5 text-xs bg-gray-100 dark:bg-white/10 rounded-lg text-gray-500 dark:text-white/40">ESC</kbd>
+                </div>
+                <div class="p-4 max-h-96 overflow-y-auto">
+                    <p class="text-xs text-gray-400 dark:text-white/30 uppercase tracking-wider mb-3 px-2">Quick Actions</p>
+                    <div class="space-y-1">
+                        <button class="w-full flex items-center p-4 rounded-2xl hover:bg-gray-100 dark:hover:bg-white/[0.05] transition-colors text-left group">
+                            <div class="w-10 h-10 rounded-xl bg-wiut-blue/20 flex items-center justify-center mr-4">
+                                <i data-lucide="graduation-cap" class="w-5 h-5 text-wiut-blue"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-gray-900 dark:text-white font-medium">Open LMS</p>
+                                <p class="text-sm text-gray-500 dark:text-white/40">Learning Management System</p>
+                            </div>
+                            <i data-lucide="arrow-right" class="w-4 h-4 text-gray-300 dark:text-white/20 group-hover:text-gray-500 dark:group-hover:text-white/50 group-hover:translate-x-1 transition-all"></i>
+                        </button>
+                        <button class="w-full flex items-center p-4 rounded-2xl hover:bg-gray-100 dark:hover:bg-white/[0.05] transition-colors text-left group">
+                            <div class="w-10 h-10 rounded-xl bg-wiut-teal/20 flex items-center justify-center mr-4">
+                                <i data-lucide="calendar" class="w-5 h-5 text-wiut-teal"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-gray-900 dark:text-white font-medium">View Timetable</p>
+                                <p class="text-sm text-gray-500 dark:text-white/40">Today's schedule</p>
+                            </div>
+                            <i data-lucide="arrow-right" class="w-4 h-4 text-gray-300 dark:text-white/20 group-hover:text-gray-500 dark:group-hover:text-white/50 group-hover:translate-x-1 transition-all"></i>
+                        </button>
+                        <button class="w-full flex items-center p-4 rounded-2xl hover:bg-gray-100 dark:hover:bg-white/[0.05] transition-colors text-left group">
+                            <div class="w-10 h-10 rounded-xl bg-wiut-gold/20 flex items-center justify-center mr-4">
+                                <i data-lucide="file-text" class="w-5 h-5 text-wiut-gold"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-gray-900 dark:text-white font-medium">Check Grades</p>
+                                <p class="text-sm text-gray-500 dark:text-white/40">View your academic record</p>
+                            </div>
+                            <i data-lucide="arrow-right" class="w-4 h-4 text-gray-300 dark:text-white/20 group-hover:text-gray-500 dark:group-hover:text-white/50 group-hover:translate-x-1 transition-all"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SVG Gradients -->
+    <svg class="absolute w-0 h-0">
+        <defs>
+            <linearGradient id="gradient-teal" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#358A7C"/>
+                <stop offset="100%" stop-color="#4DACE1"/>
+            </linearGradient>
+        </defs>
+    </svg>
+    
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>

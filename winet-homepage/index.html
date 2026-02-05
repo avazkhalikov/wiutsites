@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WINET - WIUT Intranet</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- TT Wellington Font (using fallback system fonts that match the style) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Tailwind Config with WIUT Brand Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        wiut: {
+                            blue: '#264F9D',
+                            'blue-dark': '#1a3a75',
+                            'blue-light': '#3a6bc4',
+                            burgundy: '#C7293F',
+                            sky: '#4DACE1',
+                            gold: '#F6AC10',
+                            teal: '#358A7C',
+                            forest: '#0C6326',
+                        }
+                    },
+                    fontFamily: {
+                        'wellington': ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-wellington min-h-screen">
+    
+    <!-- ============================================
+         HEADER ZONE - Persistent Navigation
+         ============================================ -->
+    <header class="bg-wiut-blue text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="flex-shrink-0">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                            <span class="text-wiut-blue font-bold text-lg">W</span>
+                        </div>
+                    </div>
+                    <div class="hidden sm:block">
+                        <h1 class="text-xl font-bold tracking-tight">WINET</h1>
+                        <p class="text-xs text-blue-200 -mt-1">WIUT Intranet</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-1">
+                    <a href="#" class="px-4 py-2 rounded-lg bg-white/10 text-white font-medium text-sm hover:bg-white/20 transition-colors">
+                        Home
+                    </a>
+                    <a href="#" class="px-4 py-2 rounded-lg text-blue-100 font-medium text-sm hover:bg-white/10 transition-colors">
+                        Services
+                    </a>
+                    <a href="#" class="px-4 py-2 rounded-lg text-blue-100 font-medium text-sm hover:bg-white/10 transition-colors">
+                        Directory
+                    </a>
+                    <a href="#" class="px-4 py-2 rounded-lg text-blue-100 font-medium text-sm hover:bg-white/10 transition-colors">
+                        Help
+                    </a>
+                </nav>
+                
+                <!-- Right Side: Search, Notifications, Profile -->
+                <div class="flex items-center space-x-2 sm:space-x-4">
+                    
+                    <!-- Search Button -->
+                    <button class="p-2 rounded-lg hover:bg-white/10 transition-colors" title="Search">
+                        <i data-lucide="search" class="w-5 h-5"></i>
+                    </button>
+                    
+                    <!-- Notifications -->
+                    <button class="p-2 rounded-lg hover:bg-white/10 transition-colors relative" title="Notifications">
+                        <i data-lucide="bell" class="w-5 h-5"></i>
+                        <span class="absolute -top-1 -right-1 w-5 h-5 bg-wiut-burgundy text-xs font-bold rounded-full flex items-center justify-center">3</span>
+                    </button>
+                    
+                    <!-- User Profile -->
+                    <div class="flex items-center space-x-3 pl-2 sm:pl-4 border-l border-white/20">
+                        <div class="hidden sm:block text-right">
+                            <p class="text-sm font-medium" id="userName">John Doe</p>
+                            <p class="text-xs text-blue-200" id="userRole">Student</p>
+                        </div>
+                        <button class="w-9 h-9 rounded-full bg-wiut-gold text-wiut-blue font-bold text-sm flex items-center justify-center ring-2 ring-white/30">
+                            JD
+                        </button>
+                    </div>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button class="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors" id="mobileMenuBtn">
+                        <i data-lucide="menu" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <div class="md:hidden hidden bg-wiut-blue-dark border-t border-white/10" id="mobileMenu">
+            <nav class="px-4 py-3 space-y-1">
+                <a href="#" class="block px-4 py-2 rounded-lg bg-white/10 text-white font-medium text-sm">Home</a>
+                <a href="#" class="block px-4 py-2 rounded-lg text-blue-100 font-medium text-sm hover:bg-white/10">Services</a>
+                <a href="#" class="block px-4 py-2 rounded-lg text-blue-100 font-medium text-sm hover:bg-white/10">Directory</a>
+                <a href="#" class="block px-4 py-2 rounded-lg text-blue-100 font-medium text-sm hover:bg-white/10">Help</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- ============================================
+         ROLE SWITCHER (Demo Only)
+         ============================================ -->
+    <div class="bg-gradient-to-r from-wiut-blue/5 to-wiut-teal/5 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+            <div class="flex items-center justify-between">
+                <span class="text-xs text-gray-500 font-medium">Demo Mode: Switch Role</span>
+                <div class="flex items-center space-x-2">
+                    <button class="role-btn px-3 py-1.5 text-xs font-medium rounded-full transition-all bg-wiut-teal text-white" data-role="student">
+                        Student
+                    </button>
+                    <button class="role-btn px-3 py-1.5 text-xs font-medium rounded-full transition-all bg-gray-200 text-gray-600 hover:bg-gray-300" data-role="staff">
+                        Staff
+                    </button>
+                    <button class="role-btn px-3 py-1.5 text-xs font-medium rounded-full transition-all bg-gray-200 text-gray-600 hover:bg-gray-300" data-role="admin">
+                        Admin
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        
+        <!-- ============================================
+             GREETING & QUICK STATS
+             ============================================ -->
+        <section class="mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
+                        Good morning, <span id="greetingName">John</span>! 👋
+                    </h2>
+                    <p class="text-gray-500 mt-1" id="greetingSubtext">Here's what's happening today</p>
+                </div>
+                <div class="flex items-center space-x-2 text-sm text-gray-500">
+                    <i data-lucide="calendar" class="w-4 h-4"></i>
+                    <span id="currentDate">Thursday, February 5, 2026</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ============================================
+             INTELLIGENT WORKSPACE ZONE
+             ============================================ -->
+        
+        <!-- STUDENT VIEW -->
+        <section class="workspace-view" data-view="student">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
+                
+                <!-- Today's Schedule Card -->
+                <div class="workspace-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="p-5 border-b border-gray-100 bg-gradient-to-r from-wiut-sky/10 to-wiut-blue/5">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-xl bg-wiut-sky/20 flex items-center justify-center">
+                                    <i data-lucide="clock" class="w-5 h-5 text-wiut-sky"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Today's Schedule</h3>
+                                    <p class="text-xs text-gray-500">3 classes remaining</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-medium text-wiut-sky bg-wiut-sky/10 px-2 py-1 rounded-full">Live</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="space-y-3">
+                            <div class="flex items-center p-3 bg-wiut-blue/5 rounded-xl border-l-4 border-wiut-blue">
+                                <div class="flex-1">
+                                    <p class="font-medium text-gray-900 text-sm">Business Statistics</p>
+                                    <p class="text-xs text-gray-500">Room 301 • Dr. Smith</p>
+                                </div>
+                                <span class="text-xs font-medium text-wiut-blue">09:00 - 10:30</span>
+                            </div>
+                            <div class="flex items-center p-3 bg-gray-50 rounded-xl">
+                                <div class="flex-1">
+                                    <p class="font-medium text-gray-900 text-sm">Microeconomics</p>
+                                    <p class="text-xs text-gray-500">Room 205 • Prof. Johnson</p>
+                                </div>
+                                <span class="text-xs text-gray-500">11:00 - 12:30</span>
+                            </div>
+                            <div class="flex items-center p-3 bg-gray-50 rounded-xl">
+                                <div class="flex-1">
+                                    <p class="font-medium text-gray-900 text-sm">Academic English</p>
+                                    <p class="text-xs text-gray-500">Room 102 • Ms. Williams</p>
+                                </div>
+                                <span class="text-xs text-gray-500">14:00 - 15:30</span>
+                            </div>
+                        </div>
+                        <button class="w-full mt-4 py-2 text-sm font-medium text-wiut-blue hover:bg-wiut-blue/5 rounded-lg transition-colors expandable-btn" data-target="schedule-details">
+                            View full timetable →
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Upcoming Deadlines Card -->
+                <div class="workspace-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="p-5 border-b border-gray-100 bg-gradient-to-r from-wiut-burgundy/10 to-wiut-gold/5">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-xl bg-wiut-burgundy/20 flex items-center justify-center">
+                                    <i data-lucide="alert-circle" class="w-5 h-5 text-wiut-burgundy"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Upcoming Deadlines</h3>
+                                    <p class="text-xs text-gray-500">2 due this week</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-medium text-wiut-burgundy bg-wiut-burgundy/10 px-2 py-1 rounded-full">Urgent</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="space-y-3">
+                            <div class="flex items-center p-3 bg-red-50 rounded-xl border-l-4 border-wiut-burgundy">
+                                <div class="flex-1">
+                                    <p class="font-medium text-gray-900 text-sm">Statistics Report</p>
+                                    <p class="text-xs text-gray-500">Business Statistics • CW1</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-xs font-bold text-wiut-burgundy">2 days</span>
+                                    <p class="text-xs text-gray-400">Feb 7</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-3 bg-amber-50 rounded-xl border-l-4 border-wiut-gold">
+                                <div class="flex-1">
+                                    <p class="font-medium text-gray-900 text-sm">Economics Essay</p>
+                                    <p class="text-xs text-gray-500">Microeconomics • CW2</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-xs font-medium text-amber-600">5 days</span>
+                                    <p class="text-xs text-gray-400">Feb 10</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-3 bg-gray-50 rounded-xl">
+                                <div class="flex-1">
+                                    <p class="font-medium text-gray-900 text-sm">Group Presentation</p>
+                                    <p class="text-xs text-gray-500">Academic English • CW1</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-xs text-gray-500">12 days</span>
+                                    <p class="text-xs text-gray-400">Feb 17</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full mt-4 py-2 text-sm font-medium text-wiut-burgundy hover:bg-wiut-burgundy/5 rounded-lg transition-colors">
+                            View all coursework →
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Quick Stats Card -->
+                <div class="workspace-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow md:col-span-2 lg:col-span-1">
+                    <div class="p-5 border-b border-gray-100 bg-gradient-to-r from-wiut-teal/10 to-wiut-forest/5">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-wiut-teal/20 flex items-center justify-center">
+                                <i data-lucide="bar-chart-3" class="w-5 h-5 text-wiut-teal"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900">Your Progress</h3>
+                                <p class="text-xs text-gray-500">Semester 2, 2025-26</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center p-4 bg-green-50 rounded-xl">
+                                <div class="text-2xl font-bold text-wiut-forest">92%</div>
+                                <p class="text-xs text-gray-500 mt-1">Attendance</p>
+                            </div>
+                            <div class="text-center p-4 bg-blue-50 rounded-xl">
+                                <div class="text-2xl font-bold text-wiut-blue">3.7</div>
+                                <p class="text-xs text-gray-500 mt-1">Current GPA</p>
+                            </div>
+                            <div class="text-center p-4 bg-amber-50 rounded-xl">
+                                <div class="text-2xl font-bold text-amber-600">4/6</div>
+                                <p class="text-xs text-gray-500 mt-1">CW Submitted</p>
+                            </div>
+                            <div class="text-center p-4 bg-purple-50 rounded-xl">
+                                <div class="text-2xl font-bold text-purple-600">68</div>
+                                <p class="text-xs text-gray-500 mt-1">Credits Earned</p>
+                            </div>
+                        </div>
+                        <button class="w-full mt-4 py-2 text-sm font-medium text-wiut-teal hover:bg-wiut-teal/5 rounded-lg transition-colors">
+                            View full record →
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions for Students -->
+            <div class="mb-8">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <button class="quick-action-btn flex items-center space-x-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-wiut-blue hover:shadow-md transition-all group">
+                        <div class="w-10 h-10 rounded-lg bg-wiut-blue/10 flex items-center justify-center group-hover:bg-wiut-blue group-hover:text-white transition-colors">
+                            <i data-lucide="upload" class="w-5 h-5 text-wiut-blue group-hover:text-white"></i>
+                        </div>
+                        <span class="font-medium text-sm text-gray-700">Submit Work</span>
+                    </button>
+                    <button class="quick-action-btn flex items-center space-x-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-wiut-teal hover:shadow-md transition-all group">
+                        <div class="w-10 h-10 rounded-lg bg-wiut-teal/10 flex items-center justify-center group-hover:bg-wiut-teal group-hover:text-white transition-colors">
+                            <i data-lucide="file-text" class="w-5 h-5 text-wiut-teal group-hover:text-white"></i>
+                        </div>
+                        <span class="font-medium text-sm text-gray-700">View Grades</span>
+                    </button>
+                    <button class="quick-action-btn flex items-center space-x-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-wiut-gold hover:shadow-md transition-all group">
+                        <div class="w-10 h-10 rounded-lg bg-wiut-gold/10 flex items-center justify-center group-hover:bg-wiut-gold group-hover:text-white transition-colors">
+                            <i data-lucide="door-open" class="w-5 h-5 text-wiut-gold group-hover:text-white"></i>
+                        </div>
+                        <span class="font-medium text-sm text-gray-700">Book Room</span>
+                    </button>
+                    <button class="quick-action-btn flex items-center space-x-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-wiut-burgundy hover:shadow-md transition-all group">
+                        <div class="w-10 h-10 rounded-lg bg-wiut-burgundy/10 flex items-center justify-center group-hover:bg-wiut-burgundy group-hover:text-white transition-colors">
+                            <i data-lucide="message-square" class="w-5 h-5 text-wiut-burgundy group-hover:text-white"></i>
+                        </div>
+                        <span class="font-medium text-sm text-gray-700">Get Support</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- STAFF VIEW -->
+        <section class="workspace-view hidden" data-view="staff">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
+                
+                <!-- Teaching Today Card -->
+                <div class="workspace-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="p-5 border-b border-gray-100 bg-gradient-to-r from-wiut-blue/10 to-wiut-sky/5">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-xl bg-wiut-blue/20 flex items-center justify-center">
+                                    <i data-lucide="presentation" class="w-5 h-5 text-wiut-blue"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Teaching Today</h3>
+                                    <p class="text-xs text-gray-500">2 sessions scheduled</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="space-y-3">
+                            <div class="flex items-center p-3 bg-wiut-blue/5 rounded-xl border-l-4 border-wiut-blue">
+                                <div class="flex-1">
+                                    <p class="font-medium text-gray-900 text-sm">Business Statistics L1</p>
+                                    <p class="text-xs text-gray-500">Room 301 • 45 students</p>
+                                </div>
+                                <span class="text-xs font-medium text-wiut-blue">09:00</span>
+                            </div>
+                            <div class="flex items-center p-3 bg-gray-50 rounded-xl">
+                                <div class="flex-1">
+                                    <p class="font-medium text-gray-900 text-sm">Business Statistics S2</p>
+                                    <p class="text-xs text-gray-500">Room 205 • 28 students</p>
+                                </div>
+                                <span class="text-xs text-gray-500">14:00</span>
+                            </div>
+                        </div>
+                        <button class="w-full mt-4 py-2 text-sm font-medium text-wiut-blue hover:bg-wiut-blue/5 rounded-lg transition-colors">
+                            View teaching schedule →
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Pending Actions Card -->
+                <div class="workspace-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="p-5 border-b border-gray-100 bg-gradient-to-r from-wiut-burgundy/10 to-wiut-gold/5">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-xl bg-wiut-burgundy/20 flex items-center justify-center">
+                                    <i data-lucide="clipboard-list" class="w-5 h-5 text-wiut-burgundy"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Pending Actions</h3>
+                                    <p class="text-xs text-gray-500">Items requiring attention</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-medium text-wiut-burgundy bg-wiut-burgundy/10 px-2 py-1 rounded-full">5</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-red-50 rounded-xl">
+                                <div class="flex items-center space-x-3">
+                                    <i data-lucide="file-check" class="w-4 h-4 text-wiut-burgundy"></i>
+                                    <span class="text-sm font-medium text-gray-900">Coursework to grade</span>
+                                </div>
+                                <span class="text-xs font-bold text-wiut-burgundy bg-white px-2 py-1 rounded-full">23</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-amber-50 rounded-xl">
+                                <div class="flex items-center space-x-3">
+                                    <i data-lucide="user-check" class="w-4 h-4 text-amber-600"></i>
+                                    <span class="text-sm font-medium text-gray-900">Attendance to submit</span>
+                                </div>
+                                <span class="text-xs font-bold text-amber-600 bg-white px-2 py-1 rounded-full">2</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-blue-50 rounded-xl">
+                                <div class="flex items-center space-x-3">
+                                    <i data-lucide="book-open" class="w-4 h-4 text-wiut-blue"></i>
+                                    <span class="text-sm font-medium text-gray-900">Module chronicles</span>
+                                </div>
+                                <span class="text-xs font-bold text-wiut-blue bg-white px-2 py-1 rounded-full">1</span>
+                            </div>
+                        </div>
+                        <button class="w-full mt-4 py-2 text-sm font-medium text-wiut-burgundy hover:bg-wiut-burgundy/5 rounded-lg transition-colors">
+                            View all tasks →
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- My Modules Card -->
+                <div class="workspace-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow md:col-span-2 lg:col-span-1">
+                    <div class="p-5 border-b border-gray-100 bg-gradient-to-r from-wiut-teal/10 to-wiut-forest/5">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-wiut-teal/20 flex items-center justify-center">
+                                <i data-lucide="book-marked" class="w-5 h-5 text-wiut-teal"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900">My Modules</h3>
+                                <p class="text-xs text-gray-500">Semester 2, 2025-26</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="space-y-3">
+                            <a href="#" class="flex items-center p-3 bg-gray-50 rounded-xl hover:bg-wiut-teal/5 transition-colors group">
+                                <div class="flex-1">
+                                    <p class="font-medium text-gray-900 text-sm group-hover:text-wiut-teal">4BUSS001W Business Statistics</p>
+                                    <p class="text-xs text-gray-500">Level 4 • 156 students</p>
+                                </div>
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400 group-hover:text-wiut-teal"></i>
+                            </a>
+                            <a href="#" class="flex items-center p-3 bg-gray-50 rounded-xl hover:bg-wiut-teal/5 transition-colors group">
+                                <div class="flex-1">
+                                    <p class="font-medium text-gray-900 text-sm group-hover:text-wiut-teal">5BUSS002W Research Methods</p>
+                                    <p class="text-xs text-gray-500">Level 5 • 89 students</p>
+                                </div>
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400 group-hover:text-wiut-teal"></i>
+                            </a>
+                        </div>
+                        <button class="w-full mt-4 py-2 text-sm font-medium text-wiut-teal hover:bg-wiut-teal/5 rounded-lg transition-colors">
+                            Open Module Chronicles →
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions for Staff -->
+            <div class="mb-8">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <button class="quick-action-btn flex items-center space-x-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-wiut-blue hover:shadow-md transition-all group">
+                        <div class="w-10 h-10 rounded-lg bg-wiut-blue/10 flex items-center justify-center group-hover:bg-wiut-blue group-hover:text-white transition-colors">
+                            <i data-lucide="user-check" class="w-5 h-5 text-wiut-blue group-hover:text-white"></i>
+                        </div>
+                        <span class="font-medium text-sm text-gray-700">Take Attendance</span>
+                    </button>
+                    <button class="quick-action-btn flex items-center space-x-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-wiut-teal hover:shadow-md transition-all group">
+                        <div class="w-10 h-10 rounded-lg bg-wiut-teal/10 flex items-center justify-center group-hover:bg-wiut-teal group-hover:text-white transition-colors">
+                            <i data-lucide="edit-3" class="w-5 h-5 text-wiut-teal group-hover:text-white"></i>
+                        </div>
+                        <span class="font-medium text-sm text-gray-700">Grade Work</span>
+                    </button>
+                    <button class="quick-action-btn flex items-center space-x-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-wiut-gold hover:shadow-md transition-all group">
+                        <div class="w-10 h-10 rounded-lg bg-wiut-gold/10 flex items-center justify-center group-hover:bg-wiut-gold group-hover:text-white transition-colors">
+                            <i data-lucide="folder-open" class="w-5 h-5 text-wiut-gold group-hover:text-white"></i>
+                        </div>
+                        <span class="font-medium text-sm text-gray-700">Open DMS</span>
+                    </button>
+                    <button class="quick-action-btn flex items-center space-x-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-wiut-burgundy hover:shadow-md transition-all group">
+                        <div class="w-10 h-10 rounded-lg bg-wiut-burgundy/10 flex items-center justify-center group-hover:bg-wiut-burgundy group-hover:text-white transition-colors">
+                            <i data-lucide="video" class="w-5 h-5 text-wiut-burgundy group-hover:text-white"></i>
+                        </div>
+                        <span class="font-medium text-sm text-gray-700">Start Meeting</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ADMIN VIEW -->
+        <section class="workspace-view hidden" data-view="admin">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
+                
+                <!-- System Status Card -->
+                <div class="workspace-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="p-5 border-b border-gray-100 bg-gradient-to-r from-wiut-forest/10 to-wiut-teal/5">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-wiut-forest/20 flex items-center justify-center">
+                                <i data-lucide="activity" class="w-5 h-5 text-wiut-forest"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900">System Status</h3>
+                                <p class="text-xs text-gray-500">All systems operational</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between p-2">
+                                <span class="text-sm text-gray-600">LMS</span>
+                                <span class="flex items-center text-xs text-green-600"><span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Online</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2">
+                                <span class="text-sm text-gray-600">SRS</span>
+                                <span class="flex items-center text-xs text-green-600"><span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Online</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2">
+                                <span class="text-sm text-gray-600">DMS</span>
+                                <span class="flex items-center text-xs text-green-600"><span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Online</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2">
+                                <span class="text-sm text-gray-600">HR Portal</span>
+                                <span class="flex items-center text-xs text-green-600"><span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Online</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Access Grid -->
+                <div class="workspace-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="p-5 border-b border-gray-100 bg-gradient-to-r from-wiut-blue/10 to-wiut-sky/5">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-wiut-blue/20 flex items-center justify-center">
+                                <i data-lucide="layout-grid" class="w-5 h-5 text-wiut-blue"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900">Management Portals</h3>
+                                <p class="text-xs text-gray-500">Quick access</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="#" class="p-3 bg-gray-50 rounded-xl text-center hover:bg-wiut-blue/5 transition-colors group">
+                                <i data-lucide="users" class="w-5 h-5 text-wiut-blue mx-auto mb-1"></i>
+                                <span class="text-xs font-medium text-gray-700">Registrar</span>
+                            </a>
+                            <a href="#" class="p-3 bg-gray-50 rounded-xl text-center hover:bg-wiut-teal/5 transition-colors group">
+                                <i data-lucide="briefcase" class="w-5 h-5 text-wiut-teal mx-auto mb-1"></i>
+                                <span class="text-xs font-medium text-gray-700">HR Portal</span>
+                            </a>
+                            <a href="#" class="p-3 bg-gray-50 rounded-xl text-center hover:bg-wiut-gold/5 transition-colors group">
+                                <i data-lucide="credit-card" class="w-5 h-5 text-wiut-gold mx-auto mb-1"></i>
+                                <span class="text-xs font-medium text-gray-700">Payments</span>
+                            </a>
+                            <a href="#" class="p-3 bg-gray-50 rounded-xl text-center hover:bg-wiut-burgundy/5 transition-colors group">
+                                <i data-lucide="building" class="w-5 h-5 text-wiut-burgundy mx-auto mb-1"></i>
+                                <span class="text-xs font-medium text-gray-700">Dormitory</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Activity -->
+                <div class="workspace-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow md:col-span-2 lg:col-span-1">
+                    <div class="p-5 border-b border-gray-100 bg-gradient-to-r from-wiut-burgundy/10 to-wiut-gold/5">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-wiut-burgundy/20 flex items-center justify-center">
+                                <i data-lucide="history" class="w-5 h-5 text-wiut-burgundy"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900">Recent Activity</h3>
+                                <p class="text-xs text-gray-500">Latest system events</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-2 h-2 bg-wiut-teal rounded-full mt-2"></div>
+                                <div>
+                                    <p class="text-sm text-gray-900">New student registration batch processed</p>
+                                    <p class="text-xs text-gray-500">2 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-2 h-2 bg-wiut-blue rounded-full mt-2"></div>
+                                <div>
+                                    <p class="text-sm text-gray-900">Timetable updates published</p>
+                                    <p class="text-xs text-gray-500">5 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-2 h-2 bg-wiut-gold rounded-full mt-2"></div>
+                                <div>
+                                    <p class="text-sm text-gray-900">Payment deadline reminder sent</p>
+                                    <p class="text-xs text-gray-500">Yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full mt-4 py-2 text-sm font-medium text-wiut-burgundy hover:bg-wiut-burgundy/5 rounded-lg transition-colors">
+                            View activity log →
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions for Admin -->
+            <div class="mb-8">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <button class="quick-action-btn flex items-center space-x-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-wiut-blue hover:shadow-md transition-all group">
+                        <div class="w-10 h-10 rounded-lg bg-wiut-blue/10 flex items-center justify-center group-hover:bg-wiut-blue group-hover:text-white transition-colors">
+                            <i data-lucide="user-plus" class="w-5 h-5 text-wiut-blue group-hover:text-white"></i>
+                        </div>
+                        <span class="font-medium text-sm text-gray-700">Add User</span>
+                    </button>
+                    <button class="quick-action-btn flex items-center space-x-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-wiut-teal hover:shadow-md transition-all group">
+                        <div class="w-10 h-10 rounded-lg bg-wiut-teal/10 flex items-center justify-center group-hover:bg-wiut-teal group-hover:text-white transition-colors">
+                            <i data-lucide="calendar-plus" class="w-5 h-5 text-wiut-teal group-hover:text-white"></i>
+                        </div>
+                        <span class="font-medium text-sm text-gray-700">Create Event</span>
+                    </button>
+                    <button class="quick-action-btn flex items-center space-x-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-wiut-gold hover:shadow-md transition-all group">
+                        <div class="w-10 h-10 rounded-lg bg-wiut-gold/10 flex items-center justify-center group-hover:bg-wiut-gold group-hover:text-white transition-colors">
+                            <i data-lucide="megaphone" class="w-5 h-5 text-wiut-gold group-hover:text-white"></i>
+                        </div>
+                        <span class="font-medium text-sm text-gray-700">Announcement</span>
+                    </button>
+                    <button class="quick-action-btn flex items-center space-x-3 p-4 bg-white rounded-xl border border-gray-200 hover:border-wiut-burgundy hover:shadow-md transition-all group">
+                        <div class="w-10 h-10 rounded-lg bg-wiut-burgundy/10 flex items-center justify-center group-hover:bg-wiut-burgundy group-hover:text-white transition-colors">
+                            <i data-lucide="file-cog" class="w-5 h-5 text-wiut-burgundy group-hover:text-white"></i>
+                        </div>
+                        <span class="font-medium text-sm text-gray-700">Reports</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ============================================
+             ESSENTIAL TILES SECTION
+             ============================================ -->
+        <section class="mt-8 pt-8 border-t border-gray-200">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900">Essential Services</h3>
+                    <p class="text-sm text-gray-500">Quick access to key systems</p>
+                </div>
+                <a href="#" class="text-sm font-medium text-wiut-blue hover:text-wiut-blue-dark transition-colors">
+                    View all services →
+                </a>
+            </div>
+            
+            <!-- Student Tiles -->
+            <div class="tiles-container" data-tiles="student">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <a href="#" class="tile-card group p-6 bg-white rounded-2xl border border-gray-200 hover:border-wiut-blue hover:shadow-lg transition-all text-center">
+                        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-wiut-blue to-wiut-sky flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                            <i data-lucide="graduation-cap" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 group-hover:text-wiut-blue transition-colors">LMS</h4>
+                        <p class="text-xs text-gray-500 mt-1">Learning Management</p>
+                    </a>
+                    
+                    <a href="#" class="tile-card group p-6 bg-white rounded-2xl border border-gray-200 hover:border-wiut-teal hover:shadow-lg transition-all text-center">
+                        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-wiut-teal to-wiut-forest flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                            <i data-lucide="calendar-days" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 group-hover:text-wiut-teal transition-colors">Timetable</h4>
+                        <p class="text-xs text-gray-500 mt-1">Class Schedule</p>
+                    </a>
+                    
+                    <a href="#" class="tile-card group p-6 bg-white rounded-2xl border border-gray-200 hover:border-wiut-burgundy hover:shadow-lg transition-all text-center">
+                        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-wiut-burgundy to-wiut-gold flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                            <i data-lucide="file-check-2" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 group-hover:text-wiut-burgundy transition-colors">Coursework</h4>
+                        <p class="text-xs text-gray-500 mt-1">Submissions & Grades</p>
+                    </a>
+                    
+                    <a href="#" class="tile-card group p-6 bg-white rounded-2xl border border-gray-200 hover:border-wiut-gold hover:shadow-lg transition-all text-center">
+                        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-wiut-gold to-amber-400 flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                            <i data-lucide="user-circle" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 group-hover:text-wiut-gold transition-colors">SRS</h4>
+                        <p class="text-xs text-gray-500 mt-1">Student Record</p>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Staff Tiles -->
+            <div class="tiles-container hidden" data-tiles="staff">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <a href="#" class="tile-card group p-6 bg-white rounded-2xl border border-gray-200 hover:border-wiut-blue hover:shadow-lg transition-all text-center">
+                        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-wiut-blue to-wiut-sky flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                            <i data-lucide="graduation-cap" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 group-hover:text-wiut-blue transition-colors">LMS</h4>
+                        <p class="text-xs text-gray-500 mt-1">Learning Management</p>
+                    </a>
+                    
+                    <a href="#" class="tile-card group p-6 bg-white rounded-2xl border border-gray-200 hover:border-wiut-teal hover:shadow-lg transition-all text-center">
+                        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-wiut-teal to-wiut-forest flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                            <i data-lucide="book-text" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 group-hover:text-wiut-teal transition-colors">Module Chronicles</h4>
+                        <p class="text-xs text-gray-500 mt-1">Course Management</p>
+                    </a>
+                    
+                    <a href="#" class="tile-card group p-6 bg-white rounded-2xl border border-gray-200 hover:border-wiut-gold hover:shadow-lg transition-all text-center">
+                        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-wiut-gold to-amber-400 flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                            <i data-lucide="folder-open" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 group-hover:text-wiut-gold transition-colors">DMS</h4>
+                        <p class="text-xs text-gray-500 mt-1">Document Management</p>
+                    </a>
+                    
+                    <a href="#" class="tile-card group p-6 bg-white rounded-2xl border border-gray-200 hover:border-wiut-burgundy hover:shadow-lg transition-all text-center">
+                        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-wiut-burgundy to-wiut-gold flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                            <i data-lucide="briefcase" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 group-hover:text-wiut-burgundy transition-colors">HR Portal</h4>
+                        <p class="text-xs text-gray-500 mt-1">Human Resources</p>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Admin Tiles -->
+            <div class="tiles-container hidden" data-tiles="admin">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <a href="#" class="tile-card group p-6 bg-white rounded-2xl border border-gray-200 hover:border-wiut-blue hover:shadow-lg transition-all text-center">
+                        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-wiut-blue to-wiut-sky flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                            <i data-lucide="users" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 group-hover:text-wiut-blue transition-colors">Registrar</h4>
+                        <p class="text-xs text-gray-500 mt-1">Student Registry</p>
+                    </a>
+                    
+                    <a href="#" class="tile-card group p-6 bg-white rounded-2xl border border-gray-200 hover:border-wiut-teal hover:shadow-lg transition-all text-center">
+                        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-wiut-teal to-wiut-forest flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                            <i data-lucide="briefcase" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 group-hover:text-wiut-teal transition-colors">HR Portal</h4>
+                        <p class="text-xs text-gray-500 mt-1">Human Resources</p>
+                    </a>
+                    
+                    <a href="#" class="tile-card group p-6 bg-white rounded-2xl border border-gray-200 hover:border-wiut-gold hover:shadow-lg transition-all text-center">
+                        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-wiut-gold to-amber-400 flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                            <i data-lucide="folder-open" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 group-hover:text-wiut-gold transition-colors">DMS</h4>
+                        <p class="text-xs text-gray-500 mt-1">Document Management</p>
+                    </a>
+                    
+                    <a href="#" class="tile-card group p-6 bg-white rounded-2xl border border-gray-200 hover:border-wiut-burgundy hover:shadow-lg transition-all text-center">
+                        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-wiut-burgundy to-wiut-gold flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                            <i data-lucide="door-open" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 group-hover:text-wiut-burgundy transition-colors">Room Reservation</h4>
+                        <p class="text-xs text-gray-500 mt-1">Facility Booking</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ============================================
+             ANNOUNCEMENTS STRIP (Optional Collapsible)
+             ============================================ -->
+        <section class="mt-8 pt-6 border-t border-gray-200">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900 flex items-center">
+                    <i data-lucide="megaphone" class="w-5 h-5 text-wiut-burgundy mr-2"></i>
+                    Announcements
+                </h3>
+                <button class="text-sm text-gray-500 hover:text-wiut-blue transition-colors" id="toggleAnnouncements">
+                    <span>Show all</span>
+                </button>
+            </div>
+            <div class="bg-gradient-to-r from-wiut-blue/5 to-wiut-sky/5 rounded-2xl p-4 border border-wiut-blue/10">
+                <div class="flex items-start space-x-4">
+                    <div class="w-10 h-10 rounded-xl bg-wiut-burgundy/20 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="info" class="w-5 h-5 text-wiut-burgundy"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-medium text-gray-900">Semester 2 Registration Now Open</p>
+                        <p class="text-sm text-gray-600 mt-1">All students must complete module registration by February 15, 2026. Visit the Registrar portal for more details.</p>
+                        <p class="text-xs text-gray-400 mt-2">Posted 2 days ago by Academic Office</p>
+                    </div>
+                    <button class="text-gray-400 hover:text-gray-600 p-1">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+    
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="bg-gray-100 border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center space-x-4">
+                    <div class="w-8 h-8 bg-wiut-blue rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">W</span>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-900">Westminster International University in Tashkent</p>
+                        <p class="text-xs text-gray-500">An Accredited Institution of the University of Westminster (UK)</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-6 text-sm text-gray-500">
+                    <a href="#" class="hover:text-wiut-blue transition-colors">Help & Support</a>
+                    <a href="#" class="hover:text-wiut-blue transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-wiut-blue transition-colors">Contact IT</a>
+                </div>
+            </div>
+            <div class="mt-6 pt-6 border-t border-gray-200 text-center">
+                <p class="text-xs text-gray-400">© 2026 WIUT. All rights reserved. WINET v2.0</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- ============================================
+         AI ASSISTANT WIDGET
+         ============================================ -->
+    <div id="aiAssistant" class="fixed bottom-6 right-6 z-50">
+        <!-- Chat Window -->
+        <div id="aiChatWindow" class="hidden mb-4 w-[380px] max-w-[calc(100vw-3rem)] rounded-2xl shadow-2xl overflow-hidden border border-gray-200 bg-white">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-wiut-blue to-wiut-sky p-4 text-white">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+                            <i data-lucide="bot" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">WINET Assistant</h3>
+                            <p class="text-xs text-white/70 flex items-center space-x-1">
+                                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                                <span>Online • Ready to help</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button id="aiChatClose" class="p-2 hover:bg-white/20 rounded-lg transition-colors">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Chat Messages -->
+            <div id="aiChatMessages" class="h-80 overflow-y-auto p-4 space-y-4 bg-gray-50">
+                <!-- Welcome Message -->
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-wiut-blue to-wiut-sky flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="bg-white rounded-2xl rounded-tl-none p-4 shadow-sm border border-gray-100">
+                            <p class="text-gray-700 text-sm">Hello! 👋 I'm your WINET Assistant. I can help you with:</p>
+                            <ul class="mt-2 space-y-1 text-sm text-gray-600">
+                                <li class="flex items-center space-x-2">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-wiut-teal"></i>
+                                    <span>Finding information in WINET</span>
+                                </li>
+                                <li class="flex items-center space-x-2">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-wiut-teal"></i>
+                                    <span>Navigating to services</span>
+                                </li>
+                                <li class="flex items-center space-x-2">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-wiut-teal"></i>
+                                    <span>Answering your questions</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1 ml-2">Just now</p>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="flex flex-wrap gap-2 justify-center">
+                    <button class="ai-quick-btn px-3 py-1.5 text-xs font-medium bg-wiut-blue/10 text-wiut-blue rounded-full hover:bg-wiut-blue/20 transition-colors">
+                        📅 My timetable
+                    </button>
+                    <button class="ai-quick-btn px-3 py-1.5 text-xs font-medium bg-wiut-teal/10 text-wiut-teal rounded-full hover:bg-wiut-teal/20 transition-colors">
+                        📊 Check grades
+                    </button>
+                    <button class="ai-quick-btn px-3 py-1.5 text-xs font-medium bg-wiut-burgundy/10 text-wiut-burgundy rounded-full hover:bg-wiut-burgundy/20 transition-colors">
+                        ⏰ Deadlines
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Input Area -->
+            <div class="p-4 border-t border-gray-200 bg-white">
+                <div class="flex items-center space-x-3">
+                    <input type="text" id="aiChatInput" placeholder="Type your message..." class="flex-1 px-4 py-3 bg-gray-100 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 outline-none focus:ring-2 focus:ring-wiut-blue/50 transition-all text-sm">
+                    <button id="aiSendBtn" class="p-3 bg-gradient-to-r from-wiut-blue to-wiut-sky text-white rounded-xl hover:shadow-lg hover:shadow-wiut-blue/30 transition-all">
+                        <i data-lucide="send" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                <p class="text-xs text-gray-400 text-center mt-2">Powered by WIUT AI • Press Enter to send</p>
+            </div>
+        </div>
+        
+        <!-- Floating Button -->
+        <button id="aiChatToggle" class="group relative w-14 h-14 bg-gradient-to-r from-wiut-blue to-wiut-sky text-white rounded-2xl shadow-lg shadow-wiut-blue/30 hover:shadow-xl hover:shadow-wiut-blue/40 hover:scale-105 transition-all flex items-center justify-center">
+            <i data-lucide="message-circle" class="w-6 h-6 group-hover:scale-110 transition-transform" id="aiIconOpen"></i>
+            <i data-lucide="x" class="w-6 h-6 hidden" id="aiIconClose"></i>
+            <!-- Notification Badge -->
+            <span class="absolute -top-1 -right-1 w-5 h-5 bg-wiut-burgundy text-white text-xs font-bold rounded-full flex items-center justify-center animate-pulse">1</span>
+        </button>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>

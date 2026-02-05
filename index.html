@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WINET Prototypes — Select Version</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        wiut: {
+                            blue: '#264F9D',
+                            burgundy: '#C7293F',
+                            sky: '#4DACE1',
+                            gold: '#F6AC10',
+                            teal: '#358A7C',
+                            forest: '#0C6326',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Sora', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-12px) scale(1.02);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #264F9D, #4DACE1, #358A7C);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: pulse-orb 8s ease-in-out infinite;
+        }
+        @keyframes pulse-orb {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 min-h-screen font-sans text-white overflow-x-hidden">
+    
+    <!-- Animated Background -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="orb w-[600px] h-[600px] bg-wiut-blue -top-40 -left-40" style="animation-delay: 0s;"></div>
+        <div class="orb w-[500px] h-[500px] bg-wiut-teal top-1/2 -right-40" style="animation-delay: 2s;"></div>
+        <div class="orb w-[400px] h-[400px] bg-wiut-burgundy bottom-0 left-1/3" style="animation-delay: 4s;"></div>
+    </div>
+    
+    <!-- Header -->
+    <header class="pt-8 pb-4 px-6">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-wiut-blue via-wiut-sky to-wiut-teal flex items-center justify-center font-bold text-xl">
+                    W
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold">WINET</h1>
+                    <p class="text-xs text-white/50">Prototype Gallery</p>
+                </div>
+            </div>
+            <a href="https://github.com/avazkhalikov/wiutsites" target="_blank" class="flex items-center space-x-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-sm">
+                <i data-lucide="github" class="w-4 h-4"></i>
+                <span class="hidden sm:inline">View on GitHub</span>
+            </a>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="px-6 py-12 sm:py-20 text-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-wiut-teal/20 border border-wiut-teal/30 mb-8">
+                <span class="w-2 h-2 bg-wiut-teal rounded-full animate-pulse"></span>
+                <span class="text-sm text-wiut-teal">5 Unique Designs</span>
+            </div>
+            
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+                <span class="block text-white/90">WIUT Intranet</span>
+                <span class="block gradient-text">Homepage Prototypes</span>
+            </h1>
+            
+            <p class="text-lg sm:text-xl text-white/50 max-w-2xl mx-auto mb-12">
+                Explore 5 unique frontend designs for the WINET homepage. Each version offers a different visual experience and interaction style.
+            </p>
+        </div>
+    </section>
+    
+    <!-- Cards Grid -->
+    <section class="px-6 pb-20">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Version 1 -->
+            <a href="winet-homepage/index.html" class="card-hover group block p-6 rounded-3xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 hover:border-wiut-blue/50 overflow-hidden relative">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-wiut-blue/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="px-3 py-1 rounded-full bg-wiut-blue/20 text-wiut-blue text-xs font-semibold">v1.0</span>
+                        <i data-lucide="arrow-up-right" class="w-5 h-5 text-white/30 group-hover:text-wiut-blue transition-colors"></i>
+                    </div>
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-wiut-blue to-wiut-sky flex items-center justify-center mb-4">
+                        <i data-lucide="layout-dashboard" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-wiut-sky transition-colors">Classic Hybrid</h3>
+                    <p class="text-sm text-white/50">Clean professional design with workspace cards and essential tiles. Light theme, role-based views.</p>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="px-2 py-1 rounded-md bg-white/5 text-xs text-white/40">Light Mode</span>
+                        <span class="px-2 py-1 rounded-md bg-white/5 text-xs text-white/40">Role Switcher</span>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Version 2 -->
+            <a href="winet-homepage2/index.html" class="card-hover group block p-6 rounded-3xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 hover:border-wiut-teal/50 overflow-hidden relative">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-wiut-teal/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="px-3 py-1 rounded-full bg-wiut-teal/20 text-wiut-teal text-xs font-semibold">v2.0</span>
+                        <i data-lucide="arrow-up-right" class="w-5 h-5 text-white/30 group-hover:text-wiut-teal transition-colors"></i>
+                    </div>
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-wiut-teal to-wiut-forest flex items-center justify-center mb-4">
+                        <i data-lucide="sparkles" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-wiut-teal transition-colors">WOW Edition</h3>
+                    <p class="text-sm text-white/50">Bento grid layout, glassmorphism, command palette (Cmd+K), animated backgrounds. Rector's view included.</p>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="px-2 py-1 rounded-md bg-white/5 text-xs text-white/40">Dark/Light</span>
+                        <span class="px-2 py-1 rounded-md bg-white/5 text-xs text-white/40">Rector View</span>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Version 3 -->
+            <a href="winet-homepage3/index.html" class="card-hover group block p-6 rounded-3xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 hover:border-wiut-gold/50 overflow-hidden relative">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-wiut-gold/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="px-3 py-1 rounded-full bg-wiut-gold/20 text-wiut-gold text-xs font-semibold">v3.0</span>
+                        <i data-lucide="arrow-up-right" class="w-5 h-5 text-white/30 group-hover:text-wiut-gold transition-colors"></i>
+                    </div>
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-wiut-gold to-orange-500 flex items-center justify-center mb-4">
+                        <i data-lucide="crown" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-wiut-gold transition-colors">Champion Design</h3>
+                    <p class="text-sm text-white/50">Ultra-premium Apple-like experience with 3D card tilts, magnetic buttons, and community photo grid.</p>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="px-2 py-1 rounded-md bg-white/5 text-xs text-white/40">3D Effects</span>
+                        <span class="px-2 py-1 rounded-md bg-white/5 text-xs text-white/40">Photos</span>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Version 4 -->
+            <a href="winet-homepage4/index.html" class="card-hover group block p-6 rounded-3xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 hover:border-amber-400/50 overflow-hidden relative">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-amber-400/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="px-3 py-1 rounded-full bg-amber-400/20 text-amber-400 text-xs font-semibold">v4.0</span>
+                        <i data-lucide="arrow-up-right" class="w-5 h-5 text-white/30 group-hover:text-amber-400 transition-colors"></i>
+                    </div>
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-300 flex items-center justify-center mb-4">
+                        <i data-lucide="sun" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-amber-400 transition-colors">The Sanctuary</h3>
+                    <p class="text-sm text-white/50">Calm, warm aesthetic with cream backgrounds, gentle orbs, daily motivations, and emotional design.</p>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="px-2 py-1 rounded-md bg-white/5 text-xs text-white/40">Warm Theme</span>
+                        <span class="px-2 py-1 rounded-md bg-white/5 text-xs text-white/40">Minimal</span>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Version 5 -->
+            <a href="winet-homepage5/index.html" class="card-hover group block p-6 rounded-3xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 hover:border-wiut-sky/50 overflow-hidden relative">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-wiut-sky/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="px-3 py-1 rounded-full bg-wiut-sky/20 text-wiut-sky text-xs font-semibold">v5.0</span>
+                        <i data-lucide="arrow-up-right" class="w-5 h-5 text-white/30 group-hover:text-wiut-sky transition-colors"></i>
+                    </div>
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-wiut-blue via-wiut-sky to-wiut-teal flex items-center justify-center mb-4">
+                        <i data-lucide="zap" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-wiut-sky transition-colors">THE PULSE</h3>
+                    <p class="text-sm text-white/50">Bold, energetic design with animated gradients, floating particles, live stats, and AI assistant.</p>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="px-2 py-1 rounded-md bg-white/5 text-xs text-white/40">Dark/Light</span>
+                        <span class="px-2 py-1 rounded-md bg-white/5 text-xs text-white/40">AI Chat</span>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Info Card -->
+            <div class="p-6 rounded-3xl bg-gradient-to-br from-wiut-burgundy/20 to-wiut-burgundy/5 border border-wiut-burgundy/20 flex flex-col justify-center">
+                <div class="text-center">
+                    <div class="w-14 h-14 rounded-2xl bg-wiut-burgundy/20 flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="info" class="w-7 h-7 text-wiut-burgundy"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">About These Prototypes</h3>
+                    <p class="text-sm text-white/50 mb-4">Frontend-only UI prototypes for WIUT Intranet redesign. Built with Tailwind CSS, no backend.</p>
+                    <div class="flex items-center justify-center space-x-4 text-xs text-white/40">
+                        <span class="flex items-center space-x-1">
+                            <i data-lucide="code" class="w-4 h-4"></i>
+                            <span>HTML/CSS/JS</span>
+                        </span>
+                        <span class="flex items-center space-x-1">
+                            <i data-lucide="palette" class="w-4 h-4"></i>
+                            <span>Tailwind</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="px-6 py-8 border-t border-white/10">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
+                <p class="text-sm text-white/50">Westminster International University in Tashkent</p>
+                <p class="text-xs text-white/30">WINET Homepage Prototype Collection • 2026</p>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="https://wiut.uz" target="_blank" class="text-sm text-white/40 hover:text-wiut-sky transition-colors">wiut.uz</a>
+                <a href="https://github.com/avazkhalikov/wiutsites" target="_blank" class="text-sm text-white/40 hover:text-wiut-sky transition-colors">GitHub</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
